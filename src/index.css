@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .active {
+  color: black !important;
+
+  background: #50C878 !important;
+} */
+
+html {
+  scroll-behavior: smooth;
+}
