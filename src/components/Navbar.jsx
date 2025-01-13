@@ -6,20 +6,22 @@ const Navbar = () => {
 
     const { name: user } = useAuth();
     // console.log(user);
-    const links = <>
+    const links = (
+      <>
         <li>
-            <NavLink>Home</NavLink>
+          <NavLink>Home</NavLink>
         </li>
         <li>
-            <NavLink>About US</NavLink>
+          <NavLink>Apartment</NavLink>
         </li>
         <li>
-            <NavLink>Contact US</NavLink>
+          <NavLink>Contact US</NavLink>
         </li>
-    </>
+      </>
+    );
 
     return (
-      <div className="navbar bg-base-300 container mx-auto">
+      <div className="navbar  container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -45,17 +47,24 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">daisyUI</a>
+          <div className="flex items-center gap-2">
+            <img
+              className="w-12 h-12 rounded-full object-cover"
+              src="/logo.png"
+              alt=""
+            />
+            <a className=" text-xl text-white">LivingNest</a>
+          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
+          <ul className="menu font-bold  menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
           <div className="flex gap-2">
-            <button className="btn btn-primary">
+            <button className="btn btn-primary bg-accent text-white hover:bg-primary">
               <NavLink to="/logIn">LogIn</NavLink>
             </button>
-            <button className="btn btn-primary">
+            <button className="btn btn-primary bg-accent text-white hover:bg-primary">
               <NavLink to="/signUp">SignUp</NavLink>
             </button>
           </div>

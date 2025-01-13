@@ -2,12 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .active {
-  color: black !important;
+.active {
+  color: white !important;
 
-  background: #50C878 !important;
-} */
+  background: none !important;
+}
+.active:hover{
+  color: #F05D23  !important;
+}
 
 html {
   scroll-behavior: smooth;
+}
+
+body{
+  background-color:#F3F4F6;
 }
