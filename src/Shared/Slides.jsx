@@ -2,7 +2,7 @@ const Slides = ({ image, title, description }) => {
   return (
     <div className="relative text-white">
       {/* Image */}
-      <img className="h-[65vh] w-full bg-black opacity-80 object-cover" src={image} alt={title} />
+      <img className="h-[65vh] w-full bg-black opacity-80 object-cover rounded-xl" src={image} alt={title} />
 
       {/* Overlay content */}
       <div className="absolute inset-0 flex flex-col items-center justify-center  ">
