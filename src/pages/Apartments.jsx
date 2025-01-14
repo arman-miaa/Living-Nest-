@@ -22,6 +22,14 @@ const Apartments = () => {
             status: "pending",
         }
 
+        axiosPublic.post("/agreements", agreementData)
+            .then(res => {
+            console.log(res.data);
+            })
+            .catch(error => {
+            console.log('ERROR', error);
+        })
+
         console.log(agreementData);
 
         
