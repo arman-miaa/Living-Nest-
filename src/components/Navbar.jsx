@@ -13,13 +13,13 @@ const Navbar = () => {
           <NavLink>Home</NavLink>
         </li>
         <li>
-          <NavLink>Apartment</NavLink>
+          <NavLink to="apartments">Apartments</NavLink>
         </li>
         <li>
           <NavLink>Contact US</NavLink>
         </li>
       </>
-  );
+    );
   
   const handleLogOutUser = () => {
     logOutUser();
