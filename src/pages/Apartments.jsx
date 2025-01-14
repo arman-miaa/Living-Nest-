@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
+import { toast } from "react-toastify";
 
 
 const Apartments = () => {
@@ -27,7 +28,8 @@ const Apartments = () => {
             console.log(res.data);
             })
             .catch(error => {
-            console.log('ERROR', error);
+                console.log('ERROR', error.response.data.message);
+                toast.warn(error.response.data.message);
         })
 
         console.log(agreementData);
