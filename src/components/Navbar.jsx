@@ -1,11 +1,12 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import userImg from '../../src/assets/user-icon.jpg'
 
 
 const Navbar = () => {
 
-    const { name: user } = useAuth();
-    // console.log(user);
+    const { user, logOutUser } = useAuth();
+    console.log(user);
     const links = (
       <>
         <li>
@@ -18,7 +19,11 @@ const Navbar = () => {
           <NavLink>Contact US</NavLink>
         </li>
       </>
-    );
+  );
+  
+  const handleLogOutUser = () => {
+    logOutUser();
+  }
 
     return (
       <div className="navbar  container mx-auto">
@@ -59,16 +64,48 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu font-bold  menu-horizontal px-1">{links}</ul>
         </div>
-        <div className="navbar-end">
-          <div className="flex gap-2">
-            <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
-              <NavLink to="/logIn">LogIn</NavLink>
-            </button>
-            <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
-              <NavLink to="/signUp">SignUp</NavLink>
-            </button>
+        {user ? (
+          <div className="navbar-end">
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="User Avatar"
+                    src={user.photoURL || userImg}
+                    onError={(e) => (e.target.src = userImg)} 
+                  />
+                </div>
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              >
+                <li>{user.displayName}</li>
+                <li>
+                  <Link>Dashboard</Link>
+                </li>
+                <li>
+                  <button onClick={handleLogOutUser} className="btn bg-primary">LogOut</button>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="navbar-end">
+            <div className="flex gap-2">
+              <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
+                <NavLink to="/logIn">LogIn</NavLink>
+              </button>
+              <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
+                <NavLink to="/signUp">SignUp</NavLink>
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     );
 };

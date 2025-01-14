@@ -4,6 +4,7 @@ import Loading from "../pages/Loading";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signOut,
   updateProfile,
 } from "firebase/auth";
 
@@ -33,6 +34,10 @@ const AuthProvider = ({ children }) => {
     return updateProfile(auth.currentUser, updateData);
   };
 
+  const logOutUser = () => {
+    return signOut(auth);
+  }
+
   const authInfo = {
     user,
     setUser,
@@ -40,6 +45,7 @@ const AuthProvider = ({ children }) => {
     setLoader,
     createUser,
     updateUserProfile,
+    logOutUser,
   };
 
   return (
