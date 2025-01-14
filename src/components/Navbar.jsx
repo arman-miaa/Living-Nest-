@@ -6,7 +6,7 @@ import userImg from '../../src/assets/user-icon.jpg'
 const Navbar = () => {
 
     const { user, logOutUser } = useAuth();
-    console.log(user);
+    // console.log(user);
     const links = (
       <>
         <li>
@@ -82,7 +82,7 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
               >
                 <li>{user.displayName}</li>
                 <li>
