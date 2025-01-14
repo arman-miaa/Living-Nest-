@@ -61,10 +61,10 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           <div className="flex gap-2">
-            <button className="btn btn-primary bg-accent text-white hover:bg-primary">
+            <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
               <NavLink to="/logIn">LogIn</NavLink>
             </button>
-            <button className="btn btn-primary bg-accent text-white hover:bg-primary">
+            <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
               <NavLink to="/signUp">SignUp</NavLink>
             </button>
           </div>
