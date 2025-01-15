@@ -6,16 +6,16 @@ const MemberMenu = () => {
         <h2 className="text-3xl font-bold text-primary">Member Menu ...</h2>
         <ul>
           <li>
-            <NavLink>My Profile</NavLink>
+            <NavLink to="/dashboard/memberProfile">My Profile</NavLink>
           </li>
           <li>
-            <NavLink>Make Payment</NavLink>
+            <NavLink to='/dashboard/makePayment'>Make Payment</NavLink>
           </li>
           <li>
-            <NavLink>Payment History</NavLink>
+            <NavLink to='/dashboard/paymentHistory'>Payment History</NavLink>
           </li>
           <li>
-            <NavLink>Announcements</NavLink>
+            <NavLink to='/dashboard/memberAnnouncement'>Announcements</NavLink>
           </li>
         </ul>
       </div>

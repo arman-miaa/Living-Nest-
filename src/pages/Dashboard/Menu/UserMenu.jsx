@@ -6,10 +6,10 @@ const UserMenu = () => {
         <h2 className="text-3xl font-bold text-primary">User Menu ...</h2>
         <ul>
           <li>
-            <NavLink>My Profile</NavLink>
+            <NavLink to="/dashboard/userProfile">My Profile</NavLink>
           </li>
           <li>
-            <NavLink>Announcements</NavLink>
+            <NavLink to="/dashboard/userAnouncements">Announcements</NavLink>
           </li>
         </ul>
       </div>
