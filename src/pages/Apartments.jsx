@@ -4,10 +4,12 @@ import useAuth from "../Hooks/useAuth";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 
 const Apartments = () => {
-    const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
     const { user } = useAuth();
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(6);
@@ -60,7 +62,7 @@ const Apartments = () => {
          status: "pending",
        };
 
-       axiosPublic
+       axiosSecure
          .post("/agreements", agreementData)
          .then((res) => {
            console.log(res.data);
