@@ -10,6 +10,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const authContext = createContext();
 
@@ -17,12 +18,13 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [loader, setLoader] = useState(true);
-  const [user, setUser] = useState(null); // Default state should be `null`
+  const [user, setUser] = useState(null); 
 
   console.log(user);
+  const axiosPublic = useAxiosPublic();
 
   const createUser = (email, password) => {
-    setLoader(true); // Show loader while creating user
+    setLoader(true); 
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
@@ -37,10 +39,29 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoader(false); // Hide loader once auth state is determined
+
+      if (currentUser) {
+        const userInfo = { email: currentUser?.email };
+        axiosPublic.post('/jwt', userInfo)
+          .then(res => {
+            console.log(res);
+            if (res.data.token) {
+              localStorage.setItem('access-token', res.data.token);
+              setLoader(false)
+            }
+          })
+          .catch(error => {
+          console.log('ERROR on token', error);
+        })
+      }
+      else {
+        localStorage.removeItem('access-token')
+        setLoader(false); 
+      }
+
     });
 
-    return unsubscribe; // Properly clean up the listener
+    return unsubscribe; 
   }, []);
 
   const updateUserProfile = (updateData) => {
