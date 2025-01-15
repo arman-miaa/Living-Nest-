@@ -18,7 +18,7 @@ const useRole = () => {
     enabled: !loader && !!user?.email,
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/user/role/${user.email}`);
-      console.log("Fetched role:", data.role); 
+    //   console.log("Fetched role:", data.role); 
       return data.role;
     },
   });
