@@ -1,5 +1,4 @@
-
-import {  useState } from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
@@ -7,9 +6,10 @@ import lottieLogin from "../../src/assets/lottie/login.json";
 import Lottie from "lottie-react";
 import useAuth from "../Hooks/useAuth";
 import { useTheme } from "../hooks/ThemeProvider ";
+import { saveUser } from "../api/userApi";
 
 const Login = () => {
-    const { signInUser, signInWithGoogle, setUser } = useAuth();
+  const { signInUser, signInWithGoogle, setUser } = useAuth();
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,6 +26,7 @@ const Login = () => {
     signInUser(email, password)
       .then((result) => {
         setUser(result.user);
+        saveUser(result.user)
         toast.success("Logged in successfully!");
         form.reset();
         setError("");
@@ -40,8 +41,11 @@ const Login = () => {
   };
 
   const handleSignInUserWithGoogle = () => {
-    signInWithGoogle().then(() => {
+    signInWithGoogle().then((result) => {
       toast.success("Login successful With Google!");
+     
+      const user = result.user;
+      saveUser(user)
       navigate(from, { replace: true });
       // navigate(from);
     });

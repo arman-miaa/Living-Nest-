@@ -7,10 +7,11 @@ import { Helmet } from "react-helmet";
 import { useTheme } from "../hooks/ThemeProvider ";
 import Lottie from "lottie-react";
 import useAuth from "../Hooks/useAuth";
-import lottieSignUp from '../../src/assets/lottie/signup.json'
+import lottieSignUp from "../../src/assets/lottie/signup.json";
+import { saveUser } from "../api/userApi";
 
 const SignUp = () => {
-    const { createUser, setUser, updateUserProfile } = useAuth();
+  const { createUser, setUser, updateUserProfile } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -22,8 +23,8 @@ const SignUp = () => {
     const name = form.name.value;
     const photo = form.photo.value;
     const email = form.email.value;
-      const password = form.password.value;
-      console.log(name,photo,email,password);
+    const password = form.password.value;
+    console.log(name, photo, email, password);
 
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
     if (!passwordRegex.test(password)) {
@@ -40,6 +41,8 @@ const SignUp = () => {
 
     createUser(email, password)
       .then((result) => {
+        saveUser({ ...result.user, displayName: name });
+
         updateUserProfile({ displayName: name, photoURL: photo })
           .then(() => {
             setUser({ ...result.user, displayName: name, photoURL: photo });
@@ -47,7 +50,7 @@ const SignUp = () => {
             navigate("/");
           })
           .catch((error) => {
-            console.log("Profile update failed. Please try again.",error);
+            console.log("Profile update failed. Please try again.", error);
             toast.error("Profile update failed. Please try again.");
           });
       })
