@@ -2,41 +2,29 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
 import useAuth from "../Hooks/useAuth";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 const Apartments = () => {
     const axiosPublic = useAxiosPublic();
     const { user } = useAuth();
+    const [currentPage, setCurrentPage] = useState(0);
+    const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [count, setCount] = useState(0);
+  const navigate = useNavigate();
 
-    const {  displayName: name, email } = user;
+    const numberOfPages = Math.ceil(count / itemsPerPage);
+    
+    const pages = [...Array(numberOfPages).keys()];
+
+
+    const { displayName: name, email } = user || {};
     // console.log(name,email);
-    const handleAgreement = (apartment) => {
-        // console.log(apartment);
-
-        const agreementData = {
-            userName: name,
-            userEmail: email,
-            floorNo: apartment.floorNo,
-            blockName: apartment.blockName,
-                apartmentNo: apartment.apartmentNo,
-            rent: apartment.rent,
-            status: "pending",
-        }
-
-        axiosPublic.post("/agreements", agreementData)
-            .then(res => {
-            console.log(res.data);
-            })
-            .catch(error => {
-                console.log('ERROR', error.response.data.message);
-                toast.warn(error.response.data.message);
-        })
-
-        console.log(agreementData);
-
-        
-        
-}
+   
+   
+    
+  
   const {
     data = [],
     isLoading,
@@ -57,6 +45,39 @@ const Apartments = () => {
   if (error) {
     return <div>Error loading apartments</div>;
   }
+
+   const handleAgreement = (apartment) => {
+     // console.log(apartment);
+
+     if (user) {
+       const agreementData = {
+         userName: name,
+         userEmail: email,
+         floorNo: apartment.floorNo,
+         blockName: apartment.blockName,
+         apartmentNo: apartment.apartmentNo,
+         rent: apartment.rent,
+         status: "pending",
+       };
+
+       axiosPublic
+         .post("/agreements", agreementData)
+         .then((res) => {
+           console.log(res.data);
+         })
+         .catch((error) => {
+           console.log("ERROR", error.response.data.message);
+           toast.warn(error.response.data.message);
+         });
+
+       console.log(agreementData);
+  
+     } else {
+      navigate('/login')
+}
+
+     
+   };
 
   return (
     <div>
