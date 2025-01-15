@@ -1,4 +1,7 @@
+
+
 const Coupons = () => {
+ 
   return (
     <section className="bg-blue-100 p-8 text-center">
       <h2 className="text-3xl font-semibold text-blue-700 mb-4">

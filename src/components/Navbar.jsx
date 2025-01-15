@@ -5,8 +5,9 @@ import userImg from '../../src/assets/user-icon.jpg'
 
 const Navbar = () => {
 
-    const { user, logOutUser } = useAuth();
-    // console.log(user);
+  const { user, logOutUser } = useAuth();
+  
+    console.log(user);
     const links = (
       <>
         <li>
@@ -76,7 +77,7 @@ const Navbar = () => {
                   <img
                     alt="User Avatar"
                     src={user.photoURL || userImg}
-                    onError={(e) => (e.target.src = userImg)} 
+                    onError={(e) => (e.target.src = userImg)}
                   />
                 </div>
               </div>
@@ -86,10 +87,12 @@ const Navbar = () => {
               >
                 <li>{user?.displayName}</li>
                 <li>
-                  <Link>Dashboard</Link>
+                  <Link to="/dashboard">Dashboard</Link>
                 </li>
                 <li>
-                  <button onClick={handleLogOutUser} className="btn bg-primary">LogOut</button>
+                  <button onClick={handleLogOutUser} className="btn bg-primary">
+                    LogOut
+                  </button>
                 </li>
               </ul>
             </div>

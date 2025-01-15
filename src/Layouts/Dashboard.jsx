@@ -1,9 +1,18 @@
+import { Outlet } from "react-router-dom";
+import Sidebar from "../pages/Dashboard/Sidebar/Sidebar";
 
 const Dashboard = () => {
     return (
+      <div className="">
         <div>
-            Dashboard page
+          <Sidebar />
         </div>
+         
+
+        <div className="">
+          <Outlet></Outlet>
+        </div>
+      </div>
     );
 };
 
