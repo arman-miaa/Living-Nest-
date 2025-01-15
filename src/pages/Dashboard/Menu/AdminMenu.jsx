@@ -6,19 +6,19 @@ const AdminMenu = () => {
         <h2 className="text-3xl font-bold text-primary">Admin Menu ...</h2>
         <ul>
           <li>
-            <NavLink>Admin Profile</NavLink>
+            <NavLink to='/dashboard/adminProfile'>Admin Profile</NavLink>
           </li>
           <li>
-            <NavLink>Manage Members</NavLink>
+            <NavLink to='/dashboard/manageMember'>Manage Members</NavLink>
           </li>
           <li>
-            <NavLink>Make Announcement</NavLink>
+            <NavLink to='/dashboard/makeAnnouncement'>Make Announcement</NavLink>
           </li>
           <li>
-            <NavLink>Agreement Requests</NavLink>
+            <NavLink to='/dashboard/agreementRequests'>Agreement Requests</NavLink>
           </li>
           <li>
-            <NavLink>Manage Coupons</NavLink>
+            <NavLink to='/dashboard/manageCoupons'>Manage Coupons</NavLink>
           </li>
         </ul>
       </div>

@@ -17,6 +17,12 @@ import MemberRoute from "./MemberRoute";
 import MakePayment from "../pages/Dashboard/Member/MakePayment";
 import PaymentHistory from "../pages/Dashboard/Member/PaymentHistory";
 import MemberAnnouncements from "../pages/Dashboard/Member/MemberAnnouncements";
+import AdminRoute from "./AdminRoute";
+import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
+import ManageMember from "../pages/Dashboard/Admin/ManageMember";
+import MakeAnnouncement from "../pages/Dashboard/Admin/MakeAnnouncement";
+import AgreementRequest from "../pages/Dashboard/Admin/AgreementRequest";
+import ManageCoupons from "../pages/Dashboard/Admin/ManageCoupons";
 
 const router = createBrowserRouter([
   {
@@ -50,9 +56,46 @@ const router = createBrowserRouter([
     children: [
       // admin menu
       {
-        path: "admin",
-        element: <AdminMenu />,
+        path: "adminProfile",
+        element: <PrivateRoute>
+          <AdminRoute>
+            <AdminProfile></AdminProfile>
+          </AdminRoute>
+        </PrivateRoute>,
       },
+      {
+        path: 'manageMember',
+        element: <PrivateRoute>
+          <AdminRoute>
+            <ManageMember></ManageMember>
+          </AdminRoute>
+        </PrivateRoute>
+      },
+      {
+        path: 'makeAnnouncement',
+        element: <PrivateRoute>
+          <AdminRoute>
+            <MakeAnnouncement/>
+          </AdminRoute>
+        </PrivateRoute>
+      },
+      {
+        path: 'agreementRequests',
+        element: <PrivateRoute>
+          <AdminRoute>
+            <AgreementRequest></AgreementRequest>
+          </AdminRoute>
+        </PrivateRoute>
+      },
+      {
+        path: 'manageCoupons',
+        element: <PrivateRoute>
+          <AdminRoute>
+            <ManageCoupons></ManageCoupons>
+          </AdminRoute>
+        </PrivateRoute>
+      },
+      
 
       // member menu
       {
