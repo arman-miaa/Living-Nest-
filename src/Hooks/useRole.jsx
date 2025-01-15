@@ -24,7 +24,7 @@ const useRole = () => {
   });
 
   if (!isLoading) {
-    console.log("User Role:", role);
+    <Loading/>
   }
 
   return [role, isLoading];

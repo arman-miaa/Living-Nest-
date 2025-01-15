@@ -52,57 +52,69 @@ const router = createBrowserRouter([
   // dashboard
   {
     path: "dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       // admin menu
       {
         path: "adminProfile",
-        element: <PrivateRoute>
-          <AdminRoute>
-            <AdminProfile></AdminProfile>
-          </AdminRoute>
-        </PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AdminProfile></AdminProfile>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
-        path: 'manageMember',
-        element: <PrivateRoute>
-          <AdminRoute>
-            <ManageMember></ManageMember>
-          </AdminRoute>
-        </PrivateRoute>
+        path: "manageMember",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageMember></ManageMember>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
-        path: 'makeAnnouncement',
-        element: <PrivateRoute>
-          <AdminRoute>
-            <MakeAnnouncement/>
-          </AdminRoute>
-        </PrivateRoute>
+        path: "makeAnnouncement",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <MakeAnnouncement />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
-        path: 'agreementRequests',
-        element: <PrivateRoute>
-          <AdminRoute>
-            <AgreementRequest></AgreementRequest>
-          </AdminRoute>
-        </PrivateRoute>
+        path: "agreementRequests",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AgreementRequest></AgreementRequest>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
       {
-        path: 'manageCoupons',
-        element: <PrivateRoute>
-          <AdminRoute>
-            <ManageCoupons></ManageCoupons>
-          </AdminRoute>
-        </PrivateRoute>
+        path: "manageCoupons",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <ManageCoupons></ManageCoupons>
+            </AdminRoute>
+          </PrivateRoute>
+        ),
       },
-      
 
       // member menu
       {
         path: "memberProfile",
         element: (
           <PrivateRoute>
-            
             <MemberRoute>
               <MemberProfile></MemberProfile>
             </MemberRoute>
@@ -110,30 +122,34 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'makePayment',
-        element: <PrivateRoute>
-          <MemberRoute>
-            <MakePayment></MakePayment>
-          </MemberRoute>
-        </PrivateRoute>
+        path: "makePayment",
+        element: (
+          <PrivateRoute>
+            <MemberRoute>
+              <MakePayment></MakePayment>
+            </MemberRoute>
+          </PrivateRoute>
+        ),
       },
       {
-        path: 'paymentHistory',
-        element: <PrivateRoute>
-          <MemberRoute>
-            <PaymentHistory></PaymentHistory>
-          </MemberRoute>
-        </PrivateRoute>
+        path: "paymentHistory",
+        element: (
+          <PrivateRoute>
+            <MemberRoute>
+              <PaymentHistory></PaymentHistory>
+            </MemberRoute>
+          </PrivateRoute>
+        ),
       },
       {
-        path: 'memberAnnouncement',
-        element: <PrivateRoute>
-          <MemberRoute>
-            <MemberAnnouncements>
-              
-            </MemberAnnouncements>
-          </MemberRoute>
-        </PrivateRoute>
+        path: "memberAnnouncement",
+        element: (
+          <PrivateRoute>
+            <MemberRoute>
+              <MemberAnnouncements></MemberAnnouncements>
+            </MemberRoute>
+          </PrivateRoute>
+        ),
       },
 
       // user menu
