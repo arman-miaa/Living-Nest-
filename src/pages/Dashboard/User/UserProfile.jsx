@@ -1,9 +1,23 @@
+import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../Hooks/useAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Loading from "../../Loading";
 
 
 const UserProfile = () => {
     const { user } = useAuth();
-    console.log(user);
+  // console.log(user);
+  const axiosSequre = useAxiosSecure();
+  const { data = [], isLoading,isFetched } = useQuery({
+    queryKey: ['agreement'],
+    queryFn: async () => {
+      const res = await axiosSequre.get(`agreement/${user.email}`)
+      return res.data;
+    }
+  })
+
+  if (isLoading) <Loading />
+  console.log(data);
     return (
       <div>
         user profile
@@ -12,6 +26,7 @@ const UserProfile = () => {
             <img src={user.photoURL} alt="" />
             <h1>{user.displayName}</h1>
             <p>{user.email}</p>
+            <h3>{ data.date}</h3>
           </div>
         </div>
       </div>

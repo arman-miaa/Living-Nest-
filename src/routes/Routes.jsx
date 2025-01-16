@@ -6,8 +6,7 @@ import LogIn from "../pages/LogIn";
 import SignUp from "../pages/SignUp";
 import Apartments from "../pages/Apartments";
 import Dashboard from "../Layouts/Dashboard";
-import AdminMenu from "../pages/Dashboard/Menu/AdminMenu";
-import MemberMenu from "../pages/Dashboard/Menu/MemberMenu";
+
 
 import UserProfile from "../pages/Dashboard/User/UserProfile";
 import PrivateRoute from "./PrivateRoute";
@@ -23,6 +22,7 @@ import ManageMember from "../pages/Dashboard/Admin/ManageMember";
 import MakeAnnouncement from "../pages/Dashboard/Admin/MakeAnnouncement";
 import AgreementRequest from "../pages/Dashboard/Admin/AgreementRequest";
 import ManageCoupons from "../pages/Dashboard/Admin/ManageCoupons";
+import UserRoute from "./UserRoute";
 
 const router = createBrowserRouter([
   {
@@ -157,7 +157,9 @@ const router = createBrowserRouter([
         path: "userProfile",
         element: (
           <PrivateRoute>
-            <UserProfile></UserProfile>
+            <UserRoute>
+              <UserProfile></UserProfile>
+            </UserRoute>
           </PrivateRoute>
         ),
       },
@@ -165,7 +167,9 @@ const router = createBrowserRouter([
         path: "userAnouncements",
         element: (
           <PrivateRoute>
-            <UserAnnouncements></UserAnnouncements>
+            <UserRoute>
+              <UserAnnouncements></UserAnnouncements>
+            </UserRoute>
           </PrivateRoute>
         ),
       },
