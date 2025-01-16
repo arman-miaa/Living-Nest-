@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
   const [loader, setLoader] = useState(true);
   const [user, setUser] = useState(null); 
 
-  console.log(user);
+  // console.log(user);
   const axiosPublic = useAxiosPublic();
 
   const createUser = (email, password) => {

@@ -7,7 +7,7 @@ const Navbar = () => {
 
   const { user, logOutUser } = useAuth();
   
-    console.log(user);
+    // console.log(user);
     const links = (
       <>
         <li>
