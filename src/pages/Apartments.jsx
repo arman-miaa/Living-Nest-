@@ -5,11 +5,14 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useRole from "../Hooks/useRole";
 
 
 const Apartments = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+  const [role, isLoading] = useRole();
+  // console.log(role);
     const { user } = useAuth();
     const [currentPage, setCurrentPage] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(6);
@@ -29,7 +32,7 @@ const Apartments = () => {
   
   const {
     data = [],
-    isLoading,
+    isLoading: loading,
     error,
   } = useQuery({
     queryKey: ["apartments"],
@@ -39,8 +42,9 @@ const Apartments = () => {
     },
   });
 
+ 
 
-  if (isLoading) {
+  if (loading || isLoading) {
     return <div>Loading...</div>;
   }
 
@@ -97,7 +101,18 @@ const Apartments = () => {
               <p>Block Name: {apartment.blockName}</p>
               <p>Apartment No: {apartment.apartmentNo}</p>
               <p>Rent: {apartment.rent}</p>
-              <button onClick={() => handleAgreement(apartment)} className="btn btn-primary">Agreement</button>
+              {role === "admin" ? (
+                <span className="badge badge-success text-white px-4 py-2 rounded-full">
+                  Admin Panel
+                </span>
+              ) : (
+                <button
+                  onClick={() => handleAgreement(apartment)}
+                  className="btn btn-primary"
+                >
+                  Agreement
+                </button>
+              )}
             </div>
           </div>
         ))}

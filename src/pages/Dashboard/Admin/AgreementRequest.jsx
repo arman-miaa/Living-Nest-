@@ -20,6 +20,32 @@ const AgreementRequest = () => {
     return <div>Loading...</div>;
   }
 
+  const handleAcceptBtn = (id) => {
+      console.log(id);
+      
+      axiosSecure.patch(`/acceptUser/${id}`)
+          .then(res => {
+              console.log('done update delete and change role', res.data);
+              refetch();
+          })
+          .catch(error => {
+          console.log('failed data updated deleted and changed',error);
+      })
+  };
+  const handleRejectBtn = (id) => {
+    //   console.log(id);
+      
+      axiosSecure
+        .patch(`/rejectedUser/${id}`)
+        .then((res) => {
+          console.log("rejected agreement", res.data);
+          refetch();
+        })
+        .catch((error) => {
+          console.log("failed rejected", error);
+        });
+  };
+
   return (
     <div>
       <h1>Agreement Requests</h1>
@@ -45,11 +71,21 @@ const AgreementRequest = () => {
                 <p>Block Name: {apartment.blockName}</p>
                 <p>Apartment No: {apartment.apartmentNo}</p>
                 <p>Rent: {apartment.rent}</p>
-                      <p> {formattedDate}</p>
-                      <div className="flex justify-between">
-                          <button className="btn bg-primary text-white">Accept</button>
-                          <button className="btn bg-red-500 text-white">rejected</button>
-                      </div>
+                <p> {formattedDate}</p>
+                <div className="flex justify-between">
+                  <button
+                    onClick={() => handleAcceptBtn(apartment._id)}
+                    className="btn bg-primary text-white"
+                  >
+                    Accept
+                  </button>
+                  <button
+                    onClick={() => handleRejectBtn(apartment._id)}
+                    className="btn bg-red-500 text-white"
+                  >
+                    rejected
+                  </button>
+                </div>
               </div>
             </div>
           );
