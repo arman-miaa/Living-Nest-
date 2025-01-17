@@ -43,9 +43,18 @@ const ManageCoupons = () => {
         description: "",
         image: "",
       });
-      refetch(); 
+      refetch();
     } catch (error) {
       console.error("Error adding coupon:", error);
+    }
+  };
+
+  const handleToggleAvailability = async (id, available) => {
+    try {
+      await axiosSecure.patch(`/coupons/${id}`, { available: !available });
+      refetch(); 
+    } catch (error) {
+      console.error("Error toggling availability:", error);
     }
   };
 
@@ -62,7 +71,7 @@ const ManageCoupons = () => {
       </div>
 
       {/* Coupons Table */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto h-[calc(100vh-100px)]">
         <table className="table">
           <thead>
             <tr>
@@ -71,6 +80,8 @@ const ManageCoupons = () => {
               <th>Coupon Code</th>
               <th>Percentage</th>
               <th>Description</th>
+              <th>Availability</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -88,6 +99,17 @@ const ManageCoupons = () => {
                 <td>{coupon.code}</td>
                 <td>{coupon.percentage}%</td>
                 <td>{coupon.description}</td>
+                <td>{coupon.available ? "Available" : "Unavailable"}</td>
+                <td>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() =>
+                      handleToggleAvailability(coupon._id, coupon.available)
+                    }
+                  >
+                    Toggle
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -130,7 +152,7 @@ const ManageCoupons = () => {
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
-                  className="textarea textarea-bordered w-full"
+                  className="textarea textarea-bordered w-full resize-none"
                   required
                 />
               </div>
