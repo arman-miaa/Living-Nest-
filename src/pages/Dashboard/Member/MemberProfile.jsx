@@ -3,6 +3,7 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Loading from "../../Loading";
 import notFoundImg from "../../../../src/assets/not-found.png";
+import MakePayment from "./MakePayment";
 
 const MemberProfile = () => {
   const { user } = useAuth();
@@ -57,6 +58,7 @@ const MemberProfile = () => {
           </ul>
         </div>
       </div>
+     
     </div>
   );
 };

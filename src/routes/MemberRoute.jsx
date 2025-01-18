@@ -1,10 +1,11 @@
 import { Navigate } from "react-router-dom";
 import useRole from "../Hooks/useRole";
+import Loading from "../pages/Loading";
 
 const MemberRoute = ({children}) => {
     const [role, isLoading] = useRole();
 
-    if (isLoading) <p>loading.....</p>
+    if (isLoading) return <Loading/>
     if (role === 'member') return children;
 
 
