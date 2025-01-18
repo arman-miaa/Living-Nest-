@@ -1,8 +1,9 @@
+import Announcements from "../../../Shared/Announcements";
 
 const UserAnnouncements = () => {
     return (
         <div>
-            user anouncements ...
+            <Announcements/>
         </div>
     );
 };
