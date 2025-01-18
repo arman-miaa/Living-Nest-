@@ -1,7 +1,7 @@
 import { CardElement,useStripe,useElements } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../../Hooks/useAuth";
 
@@ -13,6 +13,7 @@ const CheckoutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
     const { user } = useAuth();
+    const navigate = useNavigate();
     const [error, setError] = useState('');
 // console.log(errro);
        const location = useLocation();
@@ -20,18 +21,10 @@ const CheckoutForm = () => {
     console.log(transectionId);
 
        // Access the data
-       const { email, floorNo, blockName, apartmentNo, rent, selectedMonth } =
-         state || {};
-    //    console.log('rent', typeof(rent));
-
-    // useEffect(() => {
-    //     axiosSecure.post("/create-payment-intent",rent)
-    //         .then(res => {
-                
-    //             setClientSecret(res.data.clientSecret)
-    //         console.log('secret---',res.data.clientSecret);
-    //     })
-    // }, [])
+       const {  floorNo, blockName, apartmentNo, rent, selectedMonth } =
+        state || {};
+    console.log(state);
+ 
 
      useEffect(() => {
        if (rent > 0) {
@@ -118,7 +111,8 @@ const CheckoutForm = () => {
     const res = await axiosSecure.post("/payment", payment);
     if (res.data) {
       console.log(res.data);
-      toast.success("payment success");
+        toast.success("payment success");
+        navigate("/dashboard/paymentHistory");
     }
   }
     

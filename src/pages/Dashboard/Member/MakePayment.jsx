@@ -3,13 +3,16 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Loading from "../../Loading";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const MakePayment = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const [hasPaid, setHasPaid] = useState(false);
 
-  const { data = {}, isLoading } = useQuery({
+  // Fetch agreement data
+  const { data = {}, isLoading: agreementLoading } = useQuery({
     queryKey: ["agreement", user.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`agreement/${user.email}`);
@@ -17,10 +20,32 @@ const MakePayment = () => {
     },
   });
 
-  if (isLoading) return <Loading />;
+  // Check if the user has already made a payment
+  useEffect(() => {
+    const checkPaymentStatus = async () => {
+      try {
+        const res = await axiosSecure.get(`/payment/${user.email}`);
+        if (res.data) {
+          setHasPaid(true); // Payment exists
+        } else {
+          setHasPaid(false); // No payment found
+        }
+      } catch (error) {
+        console.error("Error checking payment status:", error);
+      }
+    };
+    checkPaymentStatus();
+  }, [axiosSecure, user.email]);
+
+  if (agreementLoading) return <Loading />;
 
   const handlePayment = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
+    if (hasPaid) {
+      alert("You have already made the payment!");
+      return;
+    }
+
     console.log("Processing payment...");
     navigate("/dashboard/payment", {
       state: {
@@ -29,13 +54,13 @@ const MakePayment = () => {
         blockName: data.blockName || "None",
         apartmentNo: data.apartmentNo || "None",
         rent: data.rent || "None",
-        selectedMonth: e.target?.month?.value, 
+        selectedMonth: e.target?.month?.value,
       },
     });
   };
 
   return (
-    <div>
+    <div className="">
       <h1 className="text-2xl font-bold mb-4">Make Payment</h1>
       <form className="card-body" onSubmit={handlePayment}>
         <div className="form-control">
@@ -97,7 +122,7 @@ const MakePayment = () => {
           <label className="label">
             <span className="label-text">Select Month</span>
           </label>
-          <select name="mounth" className="select select-bordered" required>
+          <select name="month" className="select select-bordered" required>
             <option value="">--Select Month--</option>
             <option value="January">January</option>
             <option value="February">February</option>
@@ -115,8 +140,8 @@ const MakePayment = () => {
         </div>
 
         <div className="form-control mt-6">
-          <button type="submit" className="btn btn-primary">
-            Pay
+          <button type="submit" className="btn btn-primary" disabled={hasPaid}>
+            {hasPaid ? "Payment Completed" : "Pay Now"}
           </button>
         </div>
       </form>
