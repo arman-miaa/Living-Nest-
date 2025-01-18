@@ -16,7 +16,8 @@ const CheckoutForm = () => {
     const [error, setError] = useState('');
 // console.log(errro);
        const location = useLocation();
-       const { state } = location;
+    const { state } = location;
+    console.log(transectionId);
 
        // Access the data
        const { email, floorNo, blockName, apartmentNo, rent, selectedMonth } =
@@ -103,12 +104,17 @@ const CheckoutForm = () => {
         setTransactionId(paymentIntent.id);
       }
     }
-    // payment information
+    // payment information floorNo, blockName, apartmentNo, rent, selectedMonth
     const payment = {
       email: user.email,
       price: rent,
+      floorNo,
+        blockName,
+       transactionId: paymentIntent.id,
+      apartmentNo,
+      selectedMonth,
     };
-      console.log(payment);
+    console.log(payment);
     const res = await axiosSecure.post("/payment", payment);
     if (res.data) {
       console.log(res.data);
@@ -141,6 +147,11 @@ const CheckoutForm = () => {
           <button type="submit" disabled={!stripe}>
             Pay
           </button>
+          {transectionId && (
+            <p className="text-green-500 mt-2 font-semibold">
+              Your Transaction Id: {transectionId}
+            </p>
+          )}
         </form>
       </div>
     );
