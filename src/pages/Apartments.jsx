@@ -42,7 +42,7 @@ const Apartments = () => {
     },
   });
 
- 
+//  console.log(data);
 
   if (loading || isLoading) {
     return <div>Loading...</div>;
@@ -62,6 +62,7 @@ const Apartments = () => {
          floorNo: apartment.floorNo,
          blockName: apartment.blockName,
          apartmentNo: apartment.apartmentNo,
+         apartmentId: apartment._id,
          rent: apartment.rent,
          status: "pending",
        };
@@ -106,12 +107,18 @@ const Apartments = () => {
                   Admin Panel
                 </span>
               ) : (
-                <button
-                  onClick={() => handleAgreement(apartment)}
-                  className="btn btn-primary"
-                >
-                  Agreement
-                </button>
+                <div>
+                  {apartment.availability === "available" ? (
+                    <button
+                      onClick={() => handleAgreement(apartment)}
+                      className="btn btn-primary"
+                    >
+                      Agreement
+                    </button>
+                  ) : (
+                    "disable"
+                  )}
+                </div>
               )}
             </div>
           </div>

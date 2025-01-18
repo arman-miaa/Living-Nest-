@@ -19,6 +19,7 @@ const MakePayment = () => {
       return res.data;
     },
   });
+    console.log(data);
 
   // Check if the user has already made a payment
   useEffect(() => {
@@ -26,9 +27,9 @@ const MakePayment = () => {
       try {
         const res = await axiosSecure.get(`/payment/${user.email}`);
         if (res.data) {
-          setHasPaid(true); // Payment exists
+          setHasPaid(true); 
         } else {
-          setHasPaid(false); // No payment found
+          setHasPaid(false); 
         }
       } catch (error) {
         console.error("Error checking payment status:", error);
@@ -53,7 +54,8 @@ const MakePayment = () => {
         floorNo: data.floorNo || "None",
         blockName: data.blockName || "None",
         apartmentNo: data.apartmentNo || "None",
-        rent: data.rent || "None",
+            rent: data.rent || "None",
+        apartmentId: data.apartmentId,
         selectedMonth: e.target?.month?.value,
       },
     });

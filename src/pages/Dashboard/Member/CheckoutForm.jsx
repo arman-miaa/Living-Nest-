@@ -1,50 +1,45 @@
-import { CardElement,useStripe,useElements } from "@stripe/react-stripe-js";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../../Hooks/useAuth";
 
-
 const CheckoutForm = () => {
-     const [clientSecret, setClientSecret] = useState("");
-     const [transectionId, setTransactionId] = useState("");
-    const axiosSecure = useAxiosSecure();
-    const stripe = useStripe();
-    const elements = useElements();
-    const { user } = useAuth();
-    const navigate = useNavigate();
-    const [error, setError] = useState('');
-// console.log(errro);
-       const location = useLocation();
-    const { state } = location;
-    console.log(transectionId);
+  const [clientSecret, setClientSecret] = useState("");
+  const [transectionId, setTransactionId] = useState("");
+  const axiosSecure = useAxiosSecure();
+  const stripe = useStripe();
+  const elements = useElements();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
+  // console.log(errro);
+  const location = useLocation();
+  const { state } = location;
+  console.log(transectionId);
 
-       // Access the data
-       const {  floorNo, blockName, apartmentNo, rent, selectedMonth } =
-        state || {};
-    console.log(state);
- 
+  // Access the data
+  const { floorNo, blockName, apartmentNo,apartmentId, rent, selectedMonth } = state || {};
+  console.log(state,rent);
 
-     useEffect(() => {
-       if (rent > 0) {
-         axiosSecure
-           .post("/create-payment-intent",  {rent} )
-           .then((res) => {
-             console.log(res.data.clientSecret);
-             setClientSecret(res.data.clientSecret);
-           })
-           .catch((error) =>
-             console.error("Error creating payment intent:", error)
-           );
-       } else {
-         console.warn("Total price is 0, skipping API call.");
-       }
-     }, [axiosSecure, rent]);
-    
-  
+  useEffect(() => {
+    if (rent > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { rent })
+        .then((res) => {
+          console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+        })
+        .catch((error) =>
+          console.error("Error creating payment intent:", error)
+        );
+    } else {
+      console.warn("Total price is 0, skipping API call.");
+    }
+  }, [axiosSecure, rent]);
 
-  const   handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
 
@@ -102,53 +97,61 @@ const CheckoutForm = () => {
       email: user.email,
       price: rent,
       floorNo,
-        blockName,
-       transactionId: paymentIntent.id,
-      apartmentNo,
+      blockName,
+      transactionId: paymentIntent.id,
+        apartmentNo,
+      apartmentId: state.apartmentId,
       selectedMonth,
     };
     console.log(payment);
-    const res = await axiosSecure.post("/payment", payment);
+      const res = await axiosSecure.post("/payment", payment);
+       axiosSecure.patch(
+        `/updateApartment/${state.apartmentId}`
+      )
+          .then(res => {
+          console.log('update ',res.data);
+          })
+           .catch(err => {
+          console.log('not update', err);
+      })
     if (res.data) {
       console.log(res.data);
-        toast.success("payment success");
-        navigate("/dashboard/paymentHistory");
-    }
-  }
-    
+      toast.success("payment success");
+      navigate("/dashboard/paymentHistory");
+      }
+      
+  };
 
-
-
-    return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: "16px",
-                  color: "#424770",
-                  "::placeholder": {
-                    color: "#aab7c4",
-                  },
-                },
-                invalid: {
-                  color: "#9e2146",
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <CardElement
+          options={{
+            style: {
+              base: {
+                fontSize: "16px",
+                color: "#424770",
+                "::placeholder": {
+                  color: "#aab7c4",
                 },
               },
-            }}
-          />
-          <button type="submit" disabled={!stripe}>
-            Pay
-          </button>
-          {transectionId && (
-            <p className="text-green-500 mt-2 font-semibold">
-              Your Transaction Id: {transectionId}
-            </p>
-          )}
-        </form>
-      </div>
-    );
+              invalid: {
+                color: "#9e2146",
+              },
+            },
+          }}
+        />
+        <button type="submit" disabled={!stripe}>
+          Pay
+        </button>
+        {transectionId && (
+          <p className="text-green-500 mt-2 font-semibold">
+            Your Transaction Id: {transectionId}
+          </p>
+        )}
+      </form>
+    </div>
+  );
 };
 
 export default CheckoutForm;
