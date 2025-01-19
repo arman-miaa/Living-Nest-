@@ -1,6 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import userImg from '../../src/assets/user-icon.jpg'
+import Button from "../Shared/Button";
 
 
 const Navbar = () => {
@@ -10,14 +11,14 @@ const Navbar = () => {
     
     const links = (
       <>
-        <li>
-          <NavLink>Home</NavLink>
+        <li className="hover:text-[#28ea72f0] hover:underline">
+          <NavLink to="/">Home</NavLink>
         </li>
-        <li>
+        <li className="hover:text-[#28ea72f0] hover:underline">
           <NavLink to="apartments">Apartments</NavLink>
         </li>
-        <li>
-          <NavLink>Contact US</NavLink>
+        <li className="hover:text-[#28ea72f0] hover:underline">
+          <NavLink to="/contact">Contact US</NavLink>
         </li>
       </>
     );
@@ -63,7 +64,9 @@ const Navbar = () => {
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu font-bold  menu-horizontal px-1">{links}</ul>
+          <ul className="menu font-bold text-white text-lg  menu-horizontal px-1">
+            {links}
+          </ul>
         </div>
         {user ? (
           <div className="navbar-end">
@@ -100,12 +103,19 @@ const Navbar = () => {
         ) : (
           <div className="navbar-end">
             <div className="flex gap-2">
-              <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
+              {/* <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
                 <NavLink to="/logIn">LogIn</NavLink>
-              </button>
-              <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
+              </button> */}
+              <NavLink to="/logIn">
+                <Button styleBtn="Login" />
+              </NavLink>
+
+              {/* <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
                 <NavLink to="/signUp">SignUp</NavLink>
-              </button>
+              </button> */}
+              <NavLink to="/signUp">
+                <Button styleBtn="signUp" />
+              </NavLink>
             </div>
           </div>
         )}

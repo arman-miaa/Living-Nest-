@@ -15,7 +15,7 @@ import Slides from "../Shared/Slides";
 
 const Banner = () => {
   return (
-    <div>
+    <div className="mt-8 lg:mt-12">
       <Swiper
               spaceBetween={30}
               slidesPerView={1}
