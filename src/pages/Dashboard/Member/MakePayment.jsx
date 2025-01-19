@@ -19,7 +19,7 @@ const MakePayment = () => {
       return res.data;
     },
   });
-    console.log(data);
+    console.log('agreement',data);
 
   // Check if the user has already made a payment
   useEffect(() => {
@@ -55,7 +55,7 @@ const MakePayment = () => {
         blockName: data.blockName || "None",
         apartmentNo: data.apartmentNo || "None",
             rent: data.rent || "None",
-        apartmentId: data.apartmentId,
+        apartmentId: data?.apartmentId,
         selectedMonth: e.target?.month?.value,
       },
     });

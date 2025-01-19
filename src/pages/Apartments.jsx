@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useRole from "../Hooks/useRole";
+import Loading from "./Loading";
 
 
 const Apartments = () => {
@@ -42,10 +43,10 @@ const Apartments = () => {
     },
   });
 
-//  console.log(data);
+ console.log(data);
 
   if (loading || isLoading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   if (error) {
@@ -62,7 +63,7 @@ const Apartments = () => {
          floorNo: apartment.floorNo,
          blockName: apartment.blockName,
          apartmentNo: apartment.apartmentNo,
-         apartmentId: apartment._id,
+         apartmentId: apartment?._id,
          rent: apartment.rent,
          status: "pending",
        };
@@ -77,7 +78,7 @@ const Apartments = () => {
            toast.warn(error.response.data.message);
          });
 
-       console.log(agreementData);
+       console.log('agreement data',agreementData);
   
      } else {
       navigate('/login')
@@ -116,7 +117,9 @@ const Apartments = () => {
                       Agreement
                     </button>
                   ) : (
-                    "disable"
+                    <span className="text-gray-500 font-semibold  border-2 bg-blue-400 p-2 mt-2">
+                      Already Rented
+                    </span>
                   )}
                 </div>
               )}

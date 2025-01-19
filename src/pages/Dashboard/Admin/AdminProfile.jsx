@@ -4,23 +4,24 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Loading from "../../Loading";
 
 const AdminProfile = () => {
-  const { user } = useAuth();
-  // console.log(user);
+  const { user,loader } = useAuth();
+  console.log(user);
   const axiosSequre = useAxiosSecure();
   const {
     data = [],
     isLoading,
-    isFetched,
+    refetch,
   } = useQuery({
     queryKey: ["agreement"],
     queryFn: async () => {
-      const res = await axiosSequre.get(`agreement/${user.email}`);
+      const res = await axiosSequre.get('/admin/info');
       return res.data;
     },
   });
 
-  if (isLoading) <Loading />;
-  console.log(data);
+  if (loader || isLoading) return <Loading />;
+  console.log('data',data?.total);
+  
   return (
     <div>
       Admin profile
@@ -38,6 +39,7 @@ const AdminProfile = () => {
                       <p>{ user.email}</p>
            
           </div>
+          <h3>Total aPartment: {data.total }</h3>
         </div>
       </div>
     </div>
