@@ -1,5 +1,6 @@
 import Banner from "../components/Banner";
-import Coupons from "../components/Coupons";
+
+import CouponSection from "../components/CouponSection";
 import DiscoverOurBuilding from "../components/DiscoverOurBuilding";
 import LocationSection from "../components/LocationSection";
 
@@ -9,7 +10,7 @@ const Home = () => {
             <h2 className="text-3xl text-secondary font-bold">This is Home Page</h2>
             <Banner />
             <DiscoverOurBuilding />
-            <Coupons />
+            <CouponSection />
             <LocationSection/>
         </div>
     );
