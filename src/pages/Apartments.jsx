@@ -108,7 +108,6 @@ const handleSearchFilter = (e) => {
             <input
               type="number"
               name="minRent"
-             
               placeholder="MinRent"
               className={`input  border-emerald-700 bg-transparent input-bordered focus:outline-none focus:ring-2 `}
               required
@@ -121,55 +120,58 @@ const handleSearchFilter = (e) => {
             <input
               type="number"
               name="maxRent"
-              
               placeholder="MaxRent"
               className={`input  border-emerald-700 bg-transparent input-bordered focus:outline-none focus:ring-2 `}
               required
             />
           </div>
-          <button  className="btn btn-primary mt-8">
-            Search
-          </button>
+          <button className="btn btn-primary mt-8">Search</button>
         </form>
       </div>
       {/* Apartments Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {data.map((apartment) => (
-          <div key={apartment._id} className="card bg-base-100 shadow-xl">
-            <figure>
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Apartment"
-              />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">Floor No: {apartment.floorNo}</h2>
-              <p>Block Name: {apartment.blockName}</p>
-              <p>Apartment No: {apartment.apartmentNo}</p>
-              <p>Rent: {apartment.rent}</p>
-              {role === "admin" ? (
-                <span className="badge badge-success text-white px-4 py-2 rounded-full">
-                  Admin Panel
-                </span>
-              ) : (
-                <div>
-                  {apartment.availability === "available" ? (
-                    <button
-                      onClick={() => handleAgreement(apartment)}
-                      className="btn btn-primary"
-                    >
-                      Agreement
-                    </button>
-                  ) : (
-                    <span className="text-gray-500 font-semibold  border-2 bg-blue-400 p-2 mt-2">
-                      Already Rented
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
+        {data.length === 0 ? (
+          <div className="text-center text-lg font-semibold text-red-500 mt-8">
+            No apartments found matching your criteria.
           </div>
-        ))}
+        ) : (
+          data.map((apartment) => (
+            <div key={apartment._id} className="card bg-base-100 shadow-xl">
+              <figure>
+                <img
+                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                  alt="Apartment"
+                />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">Floor No: {apartment.floorNo}</h2>
+                <p>Block Name: {apartment.blockName}</p>
+                <p>Apartment No: {apartment.apartmentNo}</p>
+                <p>Rent: {apartment.rent}</p>
+                {role === "admin" ? (
+                  <span className="badge badge-success text-white px-4 py-2 rounded-full">
+                    Admin Panel
+                  </span>
+                ) : (
+                  <div>
+                    {apartment.availability === "available" ? (
+                      <button
+                        onClick={() => handleAgreement(apartment)}
+                        className="btn btn-primary"
+                      >
+                        Agreement
+                      </button>
+                    ) : (
+                      <span className="text-gray-500 font-semibold  border-2 bg-blue-400 p-2 mt-2">
+                        Already Rented
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))
+        )}
       </div>
 
       {/* Pagination */}
