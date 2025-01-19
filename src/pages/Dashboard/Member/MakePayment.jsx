@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Loading from "../../Loading";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const MakePayment = () => {
   const { user } = useAuth();
@@ -19,7 +20,7 @@ const MakePayment = () => {
       return res.data;
     },
   });
-    console.log('agreement',data);
+  
 
   // Check if the user has already made a payment
   useEffect(() => {
@@ -32,7 +33,7 @@ const MakePayment = () => {
           setHasPaid(false); 
         }
       } catch (error) {
-        console.error("Error checking payment status:", error);
+        toast.error("Error checking payment status:");
       }
     };
     checkPaymentStatus();
@@ -43,11 +44,11 @@ const MakePayment = () => {
   const handlePayment = (e) => {
     e.preventDefault();
     if (hasPaid) {
-      alert("You have already made the payment!");
+      toast.warn("You have already made the payment!");
       return;
     }
 
-    console.log("Processing payment...");
+    
     navigate("/dashboard/payment", {
       state: {
         email: user.email,

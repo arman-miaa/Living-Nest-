@@ -9,7 +9,7 @@ import useAuth from "../../../Hooks/useAuth";
 
 const Sidebar = () => {
     const [role, isLoading] = useRole();
-    // console.log(role);
+    
     const { logOutUser } = useAuth();
 
     if(isLoading) <Loading></Loading>

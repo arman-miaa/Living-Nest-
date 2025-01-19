@@ -1,62 +1,52 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { useLocation, useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../../Hooks/useAuth";
 
-const CheckoutForm = () => {
+const CheckoutForm = ({
+  amount,
+  email,
+  transactionId,
+  floorNo,
+  blockName,
+  apartmentNo,
+  apartmentId,
+  selectedMonth,
+}) => {
   const [clientSecret, setClientSecret] = useState("");
-  const [transectionId, setTransactionId] = useState("");
+  const [transectionId, setTransactionId] = useState(transactionId || "");
   const axiosSecure = useAxiosSecure();
   const stripe = useStripe();
   const elements = useElements();
   const { user } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  // console.log(errro);
-  const location = useLocation();
-  const { state } = location;
-  console.log(transectionId);
-
-  // Access the data
-  const { floorNo, blockName, apartmentNo,apartmentId, rent, selectedMonth } = state || {};
-  console.log(state,rent);
 
   useEffect(() => {
-    if (rent > 0) {
+    if (amount > 0) {
       axiosSecure
-        .post("/create-payment-intent", { rent })
+        .post("/create-payment-intent", { rent: amount })
         .then((res) => {
-          console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         })
         .catch((error) =>
-          console.error("Error creating payment intent:", error)
+          toast.error("Error creating payment intent:", error)
         );
-    } else {
-      console.warn("Total price is 0, skipping API call.");
     }
-  }, [axiosSecure, rent]);
+  }, [amount, axiosSecure]);
 
   const handleSubmit = async (event) => {
-    // Block native form submission.
     event.preventDefault();
 
-    // const { stripe, elements } = this.props;
-
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return;
     }
 
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
     const card = elements.getElement(CardElement);
 
-    if (card == null) {
+    if (!card) {
       return;
     }
 
@@ -66,60 +56,47 @@ const CheckoutForm = () => {
     });
 
     if (error) {
-      console.log("[error] 1", error);
-      setError("[error]", error.message);
-    } else {
-      setError("");
-      console.log("[PaymentMethod]", paymentMethod);
+      setError(error.message);
+      return;
     }
 
-    // confirm payment
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
           billing_details: {
-            email: user?.email || "anonymous",
+            email: email || user?.email || "anonymous",
             name: user?.displayName || "anonymous",
           },
         },
       });
+
     if (confirmError) {
-      console.log("confirm error");
-    } else {
-      console.log("payment intent", paymentIntent);
-      if (paymentIntent.status === "succeeded") {
-        setTransactionId(paymentIntent.id);
+      setError(confirmError.message);
+      return;
+    }
+
+    if (paymentIntent.status === "succeeded") {
+      setTransactionId(paymentIntent.id);
+
+      const payment = {
+        email: email || user.email,
+        price: amount,
+        transactionId: paymentIntent.id,
+        floorNo,
+        blockName,
+        apartmentNo,
+        apartmentId,
+        selectedMonth,
+      };
+
+      const res = await axiosSecure.post("/payment", payment)
+      
+      if (res.data) {
+        toast.success("Payment Successful!");
+        navigate("/dashboard/paymentHistory", { replace: true }); 
       }
     }
-    // payment information floorNo, blockName, apartmentNo, rent, selectedMonth
-    const payment = {
-      email: user.email,
-      price: rent,
-      floorNo,
-      blockName,
-      transactionId: paymentIntent.id,
-        apartmentNo,
-      apartmentId: state.apartmentId,
-      selectedMonth,
-    };
-    console.log(payment);
-      const res = await axiosSecure.post("/payment", payment);
-       axiosSecure.patch(
-        `/updateApartment/${state.apartmentId}`
-      )
-          .then(res => {
-          console.log('update ',res.data);
-          })
-           .catch(err => {
-          console.log('not update', err);
-      })
-    if (res.data) {
-      console.log(res.data);
-      toast.success("payment success");
-      navigate("/dashboard/paymentHistory");
-      }
-      
   };
 
   return (
@@ -141,8 +118,8 @@ const CheckoutForm = () => {
             },
           }}
         />
-        <button type="submit" disabled={!stripe}>
-          Pay
+        <button className="btn btn-primary mt-4" type="submit" disabled={!stripe || !clientSecret}>
+          Pay ${amount.toFixed(2)}
         </button>
         {transectionId && (
           <p className="text-green-500 mt-2 font-semibold">
@@ -155,3 +132,4 @@ const CheckoutForm = () => {
 };
 
 export default CheckoutForm;
+

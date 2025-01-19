@@ -20,7 +20,7 @@ const Apartments = () => {
   const [maxRent,setMaxRent] = useState(0)
   const navigate = useNavigate();
 
-  console.log(minRent,maxRent);
+ 
 
   // Calculate the number of pages
   const numberOfPages = Math.ceil(count / itemsPerPage);

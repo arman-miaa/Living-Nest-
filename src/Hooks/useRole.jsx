@@ -11,14 +11,14 @@ const useRole = () => {
     if (loader) {
       return  <Loading/>
     }
-    // console.log('user get',user);
+   
 
   const { data: role, isLoading } = useQuery({
     queryKey: ["role", user?.email],
     enabled: !loader && !!user?.email,
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/user/role/${user.email}`);
-    //   console.log("Fetched role:", data.role); 
+   
       return data.role;
     },
   });

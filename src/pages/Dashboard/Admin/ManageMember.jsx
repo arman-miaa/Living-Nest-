@@ -14,13 +14,12 @@ const ManageMember = () => {
         }
     });
     if(isLoading) return <Loading/>
-    // console.log(data);
+  
 
     const handleMemberRole = (id) => {
-        // console.log(id);
+       
         axiosSecure.patch(`/update-userRole/${id}`).then((res) => {
-          console.log("changed user role",res);
-            console.log("changed user role", res.data.result);
+         
             if (res.data.result.modifiedCount > 0) {
                 toast.success('update user role')
                 
