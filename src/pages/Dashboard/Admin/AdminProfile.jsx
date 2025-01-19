@@ -20,7 +20,7 @@ const AdminProfile = () => {
   });
 
   if (loader || isLoading) return <Loading />;
-  console.log('data',data?.total);
+  // console.log('data',data?.total);
   
   return (
     <div>
@@ -28,18 +28,20 @@ const AdminProfile = () => {
       <div className="">
         <div className="card card-side bg-base-100 shadow-xl">
           <figure>
-            <img
-              src={user.photoURL}
-              alt="Movie"
-            />
+            <img src={user.photoURL} alt="Movie" />
           </figure>
           <div className="card-body">
             <h2 className="card-title">Admin</h2>
-                      <p>{ user.displayName}</p>
-                      <p>{ user.email}</p>
-           
+            <p>{user.displayName}</p>
+            <p>{user.email}</p>
           </div>
-          <h3>Total aPartment: {data.total }</h3>
+          <div className="mr-8 mt-8">
+            <h3>Total aPartment: {data.total}</h3>
+            <h3>Available: {data.available}%</h3>
+            <h3>Unavailable: {data.unavailable}%</h3>
+            <h3>Total Users: {data.totalUsers}</h3>
+            <h3>Total Members: {data.totalMembers}</h3>
+          </div>
         </div>
       </div>
     </div>
