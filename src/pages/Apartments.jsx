@@ -16,7 +16,11 @@ const Apartments = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const [count, setCount] = useState(0);
+  const [minRent,setMinRent] = useState(0)
+  const [maxRent,setMaxRent] = useState(0)
   const navigate = useNavigate();
+
+  console.log(minRent,maxRent);
 
   // Calculate the number of pages
   const numberOfPages = Math.ceil(count / itemsPerPage);
@@ -28,10 +32,10 @@ const Apartments = () => {
     isLoading: loading,
     error,
   } = useQuery({
-    queryKey: ["apartments", currentPage, itemsPerPage],
+    queryKey: ["apartments", currentPage, itemsPerPage,minRent,maxRent],
     queryFn: async () => {
       const response = await axiosPublic.get(
-        `/apartments?page=${currentPage}&limit=${itemsPerPage}`
+        `/apartments?page=${currentPage}&limit=${itemsPerPage}&minRent=${minRent}&maxRent=${maxRent}`
       );
       setCount(response.data.total); // Set the total count from the server response
       return response.data.apartments; // Apartments data
@@ -75,8 +79,59 @@ const Apartments = () => {
     }
   };
 
+const handleSearchFilter = (e) => {
+  e.preventDefault();
+  const form = e.target;
+  const min = parseInt(form.minRent.value, 10);
+  const max = parseInt(form.maxRent.value, 10);
+
+  if (min > max) {
+    toast.error("Min Rent cannot be greater than Max Rent");
+    return;
+  }
+
+  setMinRent(min);
+  setMaxRent(max);
+  setCurrentPage(0); // Reset pagination to the first page
+};
+
+
   return (
     <div>
+      {/* Search */}
+      <div className="flex bg-base-300 justify-center py-8 items-center gap-2">
+        <form onSubmit={handleSearchFilter} action="">
+          <div className="form-control">
+            <label className="label">
+              <span className={`label-text font-semibold `}>MinRent</span>
+            </label>
+            <input
+              type="number"
+              name="minRent"
+             
+              placeholder="MinRent"
+              className={`input  border-emerald-700 bg-transparent input-bordered focus:outline-none focus:ring-2 `}
+              required
+            />
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className={`label-text font-semibold `}>MinRent</span>
+            </label>
+            <input
+              type="number"
+              name="maxRent"
+              
+              placeholder="MaxRent"
+              className={`input  border-emerald-700 bg-transparent input-bordered focus:outline-none focus:ring-2 `}
+              required
+            />
+          </div>
+          <button  className="btn btn-primary mt-8">
+            Search
+          </button>
+        </form>
+      </div>
       {/* Apartments Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((apartment) => (
