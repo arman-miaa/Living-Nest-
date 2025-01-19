@@ -8,88 +8,77 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useRole from "../Hooks/useRole";
 import Loading from "./Loading";
 
-
 const Apartments = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const [role, isLoading] = useRole();
-  // console.log(role);
-    const { user } = useAuth();
-    const [currentPage, setCurrentPage] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(6);
+  const { user } = useAuth();
+  const [currentPage, setCurrentPage] = useState(0);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
 
-    const numberOfPages = Math.ceil(count / itemsPerPage);
-    
-    const pages = [...Array(numberOfPages).keys()];
+  // Calculate the number of pages
+  const numberOfPages = Math.ceil(count / itemsPerPage);
+  const pages = [...Array(numberOfPages).keys()];
 
-
-    const { displayName: name, email } = user || {};
-    // console.log(name,email);
-   
-   
-    
-  
+  // Get apartments data with pagination
   const {
     data = [],
     isLoading: loading,
     error,
   } = useQuery({
-    queryKey: ["apartments"],
+    queryKey: ["apartments", currentPage, itemsPerPage],
     queryFn: async () => {
-      const response = await axiosPublic.get("/apartments");
-      return response.data;
+      const response = await axiosPublic.get(
+        `/apartments?page=${currentPage}&limit=${itemsPerPage}`
+      );
+      setCount(response.data.total); // Set the total count from the server response
+      return response.data.apartments; // Apartments data
     },
   });
 
- console.log(data);
-
   if (loading || isLoading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   if (error) {
     return <div>Error loading apartments</div>;
   }
 
-   const handleAgreement = (apartment) => {
-     // console.log(apartment);
+  const handleAgreement = (apartment) => {
+    if (user) {
+      const agreementData = {
+        userName: user.displayName,
+        userEmail: user.email,
+        floorNo: apartment.floorNo,
+        blockName: apartment.blockName,
+        apartmentNo: apartment.apartmentNo,
+        apartmentId: apartment._id,
+        rent: apartment.rent,
+        status: "pending",
+      };
 
-     if (user) {
-       const agreementData = {
-         userName: name,
-         userEmail: email,
-         floorNo: apartment.floorNo,
-         blockName: apartment.blockName,
-         apartmentNo: apartment.apartmentNo,
-         apartmentId: apartment?._id,
-         rent: apartment.rent,
-         status: "pending",
-       };
+      axiosSecure
+        .post("/agreements", agreementData)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((error) => {
+          console.log("ERROR", error.response.data.message);
+          toast.warn(error.response.data.message);
+        });
 
-       axiosSecure
-         .post("/agreements", agreementData)
-         .then((res) => {
-           console.log(res.data);
-         })
-         .catch((error) => {
-           console.log("ERROR", error.response.data.message);
-           toast.warn(error.response.data.message);
-         });
-
-       console.log('agreement data',agreementData);
-  
-     } else {
-      navigate('/login')
-}
-
-     
-   };
+      console.log("agreement data", agreementData);
+    } else {
+      navigate("/login");
+    }
+  };
 
   return (
     <div>
-      <div className="grid grid-cols-4 gap-4">
+      {/* Apartments Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((apartment) => (
           <div key={apartment._id} className="card bg-base-100 shadow-xl">
             <figure>
@@ -126,6 +115,23 @@ const Apartments = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Pagination */}
+      <div className="flex justify-center mt-4">
+        <div className="btn-group">
+          {pages.map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`btn ${
+                currentPage === page ? "btn-primary" : "btn-outline"
+              }`}
+            >
+              {page + 1}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );
