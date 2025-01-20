@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className="navbar  container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div tabIndex={0} role="button" className=" ml-1 mr-3 lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -56,11 +56,11 @@ const Navbar = () => {
           </div>
           <div className="flex items-center gap-2">
             <img
-              className="w-12 h-12 rounded-full object-cover"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover cursor-pointer"
               src="/logo.png"
               alt=""
             />
-            <a className=" text-xl text-white">LivingNest</a>
+            <a className=" text-lg md:text-xl text-white cursor-pointer hover:text-secondary">LivingNest</a>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -107,14 +107,14 @@ const Navbar = () => {
                 <NavLink to="/logIn">LogIn</NavLink>
               </button> */}
               <NavLink to="/logIn">
-                <Button styleBtn="Login" />
+                <Button styleBtn="LogIn" />
               </NavLink>
 
               {/* <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
                 <NavLink to="/signUp">SignUp</NavLink>
               </button> */}
               <NavLink to="/signUp">
-                <Button styleBtn="signUp" />
+                <Button styleBtn="SignUp" />
               </NavLink>
             </div>
           </div>
