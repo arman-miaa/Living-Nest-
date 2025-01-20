@@ -3,6 +3,7 @@ import Banner from "../components/Banner";
 import CouponSection from "../components/CouponSection";
 import DiscoverOurBuilding from "../components/DiscoverOurBuilding";
 import LocationSection from "../components/LocationSection";
+import QuestionSection from "../components/QuestionSection";
 
 const Home = () => {
     return (
@@ -11,7 +12,8 @@ const Home = () => {
             <Banner />
             <DiscoverOurBuilding />
             <CouponSection />
-            <LocationSection/>
+            <LocationSection />
+            <QuestionSection/>
         </div>
     );
 };
