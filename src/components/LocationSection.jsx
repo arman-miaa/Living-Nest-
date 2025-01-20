@@ -58,7 +58,7 @@ const LocationSection = () => {
 
         {/* map */}
 
-        <div className="flex-1">
+        <div className="flex-1 z-0">
           <MapContainer
             style={{ height: "400px" }}
             center={position}
