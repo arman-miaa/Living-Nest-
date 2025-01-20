@@ -8,7 +8,7 @@ const Footer = () => {
     toast.success('Thank You for subscribe US!')
   }
     return (
-      <div>
+      <div className="mt-12 lg:mt-20">
         <div className="footer bg-primary text-white  p-10">
           <footer className="flex justify-between flex-col lg:flex-row container mx-auto ">
             <nav className=" flex flex-col items-center mx-auto lg:mx-0">
