@@ -27,7 +27,7 @@ const Footer = () => {
               </p>
             </nav>
             <nav className="text-lg mx-auto lg:mx-0 flex flex-col mt-4 lg:mt-0">
-              <h6 className="footer-title text-black">Company</h6>
+              <h6 className="footer-title text-black">Quick Links</h6>
               <ul>
                 <li className="link link-hover hover:text-[#28ea72f0]">
                   <Link to="/">Home</Link>
@@ -56,11 +56,11 @@ const Footer = () => {
                   </span>
                 </label>
                 <div>
-                  <div className="join pr-4 md:pr-0 ">
+                  <div className="join pr-10 md:pr-0 ">
                     <input
                       type="email"
                       placeholder="username@site.com"
-                      className="input input-bordered join-item w-48 md:w-auto h-11   text-gray-400"
+                      className="input input-bordered join-item w-48 md:w-auto h-[36px] md:h-11   text-gray-400"
                     />
                     <div onClick={handleSubscribe} className=" ">
                       <Button styleBtn={`Subscribe`} />
@@ -104,8 +104,8 @@ const Footer = () => {
         <footer className="footer footer-center bg-[#1f5b73] text-white p-4">
           <aside>
             <p>
-              Copyright © {new Date().getFullYear()} - All right reserved by
-              BMS Ltd.
+              Copyright © {new Date().getFullYear()} - All right reserved by BMS
+              Ltd.
             </p>
           </aside>
         </footer>

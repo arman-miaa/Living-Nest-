@@ -7,6 +7,9 @@ import { Navigate, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import useRole from "../Hooks/useRole";
 import Loading from "./Loading";
+import notFoundImg from '../../src/assets/not-found.png'
+
+import Button from "../Shared/Button";
 
 const Apartments = () => {
   const axiosPublic = useAxiosPublic();
@@ -99,7 +102,7 @@ const handleSearchFilter = (e) => {
   return (
     <div>
       {/* Search */}
-      <div className="flex bg-base-300 justify-center py-8 items-center gap-2">
+      <div className="flex  justify-center py-8 items-center gap-2">
         <form onSubmit={handleSearchFilter} action="">
           <div className="form-control">
             <label className="label">
@@ -129,45 +132,55 @@ const handleSearchFilter = (e) => {
         </form>
       </div>
       {/* Apartments Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {data.length === 0 ? (
           <div className="text-center text-lg font-semibold text-red-500 mt-8">
             No apartments found matching your criteria.
           </div>
         ) : (
           data.map((apartment) => (
-            <div key={apartment._id} className="card bg-base-100 shadow-xl">
+            <div
+              key={apartment._id}
+              className="flex flex-col h-full bg-base-100 shadow-xl"
+            >
               <figure>
                 <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                  src={apartment.image || notFoundImg}
                   alt="Apartment"
+                  className="w-full h-[200px] object-cover rounded-t-xl"
+                  onError={(e) => (e.target.src = notFoundImg)}
                 />
               </figure>
-              <div className="card-body">
-                <h2 className="card-title">Floor No: {apartment.floorNo}</h2>
-                <p>Block Name: {apartment.blockName}</p>
-                <p>Apartment No: {apartment.apartmentNo}</p>
-                <p>Rent: {apartment.rent}</p>
-                {role === "admin" ? (
-                  <span className="badge badge-success text-white px-4 py-2 rounded-full">
-                    Admin Panel
-                  </span>
-                ) : (
+              <div className="flex flex-col flex-grow mt-2 mx-6">
+                <h2 className="text-2xl lg:text-3xl font-semibold text-secondary">
+                  {apartment.title}
+                </h2>
+                <p className="mt-2 text-justify">{apartment.description}</p>
+                <div className="flex justify-between mt-2 mb-4">
                   <div>
-                    {apartment.availability === "available" ? (
-                      <button
-                        onClick={() => handleAgreement(apartment)}
-                        className="btn btn-primary"
-                      >
-                        Agreement
-                      </button>
-                    ) : (
-                      <span className="text-gray-500 font-semibold  border-2 bg-blue-400 p-2 mt-2">
-                        Already Rented
-                      </span>
-                    )}
+                    <p>Floor No: {apartment.floorNo}</p>
+                    <p>Block Name: {apartment.blockName}</p>
                   </div>
-                )}
+                  <div>
+                    <p>Apartment No: {apartment.apartmentNo}</p>
+                    <p>Rent: {apartment.rent}</p>
+                  </div>
+                </div>
+                <div className="mt-auto mb-4">
+                  {apartment.availability === "available" ? (
+                    <div
+                      onClick={() => handleAgreement(apartment)}
+                     className="w-full"
+                    >
+                     
+                      <Button styleBtn={`Agreement`}/>
+                    </div>
+                  ) : (
+                    <span className="text-gray-600 font-semibold border-2 bg-orange-300 p-2 mt-2 block text-center">
+                      Already Rented
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           ))
