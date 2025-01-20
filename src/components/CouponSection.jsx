@@ -42,9 +42,9 @@ const CouponSection = () => {
               <h2 className="card-title">Discount: {coupon.percentage} %</h2>
               <p>{coupon.description}</p>
               <div className="card-actions">
-                <button onClick={() => handleCopyCode(coupon.code)}>
+                <div onClick={() => handleCopyCode(coupon.code)}>
                   <Button styleBtn={`Copy Code`} />
-                </button>
+                </div>
               </div>
             </div>
           </div>

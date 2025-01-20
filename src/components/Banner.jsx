@@ -31,15 +31,28 @@ const Banner = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <Slides image={slide1} title={`slide 1`} description='Thsi is slide 1 iamge box'></Slides>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slides image={slide2} title={`slide 1`} description='Thsi is slide 2 iamge box'></Slides>
-        </SwiperSlide>
-        <SwiperSlide>
-          <Slides image={slide3} title={`slide 1`} description='Thsi is slide 3 iamge box'></Slides>
-        </SwiperSlide>
+      <SwiperSlide>
+  <Slides
+    image={slide1}
+    title={`Cozy Bedroom`}
+    description="Relax in our cozy bedroom designed for ultimate comfort and tranquility."
+  ></Slides>
+</SwiperSlide>
+<SwiperSlide>
+  <Slides
+    image={slide2}
+    title={`Modern Living Room`}
+    description="Experience the perfect blend of style and functionality in our modern living room."
+  ></Slides>
+</SwiperSlide>
+<SwiperSlide>
+  <Slides
+    image={slide3}
+    title={`Fully Equipped Kitchen`}
+    description="Cook with ease in our fully equipped kitchen, tailored to meet all your needs."
+  ></Slides>
+</SwiperSlide>
+
       
       </Swiper>
     </div>

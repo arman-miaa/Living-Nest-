@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import img from "../../src/assets/banner1.jpg";
+import img from "../../src/assets/building.jpg";
 import Button from "../Shared/Button";
 import SectionTitle from "../Shared/SectionTitle";
 
 const DiscoverOurBuilding = () => {
   return (
-    <section className=" py-12 px-6 lg:px-16">
+    <section id="main" className=" py-12 px-6 lg:px-16">
       <SectionTitle
         heading={`About the Building`}
         subHeading="Welcome to a marvel of modern architecture! Our building stands as a testament to innovation, sustainability, and timeless design. Explore the intricate details and immerse yourself in the story of how this iconic structure came to life."
@@ -13,17 +13,17 @@ const DiscoverOurBuilding = () => {
 
       <div className="flex flex-col  lg:flex-row items-center gap-8 mt-12">
         {/* Image Section */}
-        <div className="flex-1 w-full    relative overflow-hidden  rounded-lg shadow-lg transform hover:scale-105 transition duration-300">
+        <div className="flex-1 w-full h-[400px] md:h-[500px]   relative overflow-hidden  rounded-lg shadow-lg transform hover:scale-105 transition duration-300">
           <img
             src={img}
             alt="Building"
-            className="w-full h-full object-cover"
+            className="w-full h-auto object-cover"
           />
         </div>
 
         {/* Content Section */}
         <div className="flex-1 text-left ">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+          <h3 className="text-2xl font-semibold text-accent mb-4">
             Discover Our Story
           </h3>
           <p className="text-gray-600 leading-relaxed">
