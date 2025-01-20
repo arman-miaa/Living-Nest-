@@ -24,6 +24,7 @@ import AgreementRequest from "../pages/Dashboard/Admin/AgreementRequest";
 import ManageCoupons from "../pages/Dashboard/Admin/ManageCoupons";
 import UserRoute from "./UserRoute";
 import Payment from "../pages/Dashboard/Member/Payment";
+import Contact from "../pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "signUp",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: 'contact',
+        element: <Contact/>,
       },
     ],
   },
