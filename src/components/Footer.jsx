@@ -47,7 +47,7 @@ const Footer = () => {
               </ul>
             </nav>
 
-            <form className="mx-auto lg:mx-0 text-center lg:text-left mt-4 lg:mt-0">
+            <form className="mx-auto  lg:mx-0 text-center lg:text-left mt-4 lg:mt-0">
               <h6 className="footer-title text-black text-lg">Newsletter</h6>
               <fieldset className="form-control w-80">
                 <label className="label">
@@ -56,11 +56,11 @@ const Footer = () => {
                   </span>
                 </label>
                 <div>
-                  <div className="join">
+                  <div className="join pr-4 md:pr-0 ">
                     <input
                       type="email"
                       placeholder="username@site.com"
-                      className="input input-bordered join-item  text-gray-400"
+                      className="input input-bordered join-item w-48 md:w-auto h-11   text-gray-400"
                     />
                     <div onClick={handleSubscribe} className=" ">
                       <Button styleBtn={`Subscribe`} />

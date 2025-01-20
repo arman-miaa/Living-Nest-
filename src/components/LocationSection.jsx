@@ -6,7 +6,7 @@ const LocationSection = () => {
   const position = [23.8138, 90.4312]; 
 
   return (
-    <div className="mt-20">
+    <div className="mt-20 mx-4 md:mx-0">
       <SectionTitle
         heading={`Find Us Easily`}
         subHeading={`Discover the perfect blend of convenience and accessibility at our apartment. Nestled in a prime location, our residence offers seamless connectivity to major landmarks, public transportation, and essential amenities. Explore the map and directions to reach us effortlessly`}

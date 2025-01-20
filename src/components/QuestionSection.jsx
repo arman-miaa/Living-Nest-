@@ -2,7 +2,7 @@ import SectionTitle from "../Shared/SectionTitle";
 
 const QuestionSection = () => {
   return (
-    <div className="mt-20">
+    <div className="mt-20 mx-4 md:mx-0">
       {/* Title and Description */}
       <div>
         <SectionTitle

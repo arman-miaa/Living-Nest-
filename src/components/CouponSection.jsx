@@ -22,7 +22,7 @@ const CouponSection = () => {
   };
 
   return (
-    <div>
+    <div className="mx-4 md:mx-0">
       <SectionTitle
         heading={`Exclusive Offers`}
         subHeading={`Grab exciting discounts with our special coupons. Save big and enjoy more—don’t miss out!`}
