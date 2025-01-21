@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 
@@ -17,11 +18,15 @@ const MakeAnnouncement = () => {
         }
 
         axiosSecure.post("/announcements", announcement)
-            .then(res => {
-            console.log('announcement upload successfully', res.data);
+          .then(res => {
+            if (res.data.insertedId) {
+                toast.success('Announcement Posted on database successfully!')
+              }
+                console.log("announcement upload successfully", res.data);
             })
             .catch(errro => {
             console.log('announcement uploaded failed', errro);
+            toast.error('announcement uploaded failed');
         })
     }
     return (

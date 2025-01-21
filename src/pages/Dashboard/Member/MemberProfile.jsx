@@ -3,13 +3,12 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Loading from "../../Loading";
 import notFoundImg from "../../../../src/assets/not-found.png";
-import MakePayment from "./MakePayment";
+import SectionTitle from "../../../Shared/SectionTitle";
 
 const MemberProfile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  // Fetch agreement data
   const { data = {}, isLoading } = useQuery({
     queryKey: ["agreement", user.email],
     queryFn: async () => {
@@ -20,45 +19,68 @@ const MemberProfile = () => {
 
   if (isLoading) return <Loading />;
 
+  const formatDate = (date) => {
+    if (!date) return "Not Available";
+    return new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }).format(new Date(date));
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100 py-10">
-      <h1 className="text-3xl font-bold mb-6">Member Profile</h1>
-      <div className="bg-white shadow-md rounded-lg w-3/4 max-w-2xl p-6">
-        <div className="flex flex-col items-center">
-          {/* User Image */}
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-200 py-10">
+      <SectionTitle
+        heading="Welcome to Your Profile"
+        subHeading="Manage your details and agreements with ease."
+      />
+
+      <div className="bg-white shadow-2xl rounded-xl w-full max-w-3xl mx-auto p-8">
+        <div className="relative">
+          {/* Cover Section */}
+          <div className="h-40 bg-gradient-to-r from-accent to-[#1f5b73] rounded-t-lg"></div>
+          {/* Profile Image */}
           <img
             src={user.photoURL || notFoundImg}
             onError={(e) => (e.target.src = notFoundImg)}
             alt="User Profile"
-            className="w-32 h-32 rounded-full object-cover mb-4"
+            className="w-28 h-28 rounded-full border-4 border-white shadow-lg object-cover absolute -bottom-14 left-1/2 transform -translate-x-1/2"
           />
+        </div>
 
-          {/* User Info */}
-          <h2 className="text-xl font-semibold">{user.displayName}</h2>
-          <p className="text-gray-600">{user.email}</p>
+        {/* User Info */}
+        <div className="text-center mt-16">
+          <h2 className="text-2xl font-bold text-gray-800">
+            {user.displayName}
+          </h2>
+          <p className="text-gray-500">{user.email}</p>
         </div>
 
         {/* Agreement Info */}
-        <div className="mt-6 border-t pt-4">
-          <h3 className="text-lg font-semibold mb-3">Agreement Details</h3>
-          <ul className="space-y-2">
-            <li>
-              <strong>Agreement Date:</strong> {data.date}
-            </li>
-            <li>
-              <strong>ApartmentNO:</strong> {data.apartmentNo}
-            </li>
-            <li>
-              <strong>Block:</strong> {data.blockName}
-            </li>
-            <li>
-              <strong>FloorNO:</strong> {data.floorNo}
-            </li>
-          </ul>
+        <div className="mt-8 border-t pt-6">
+          <h3 className="text-xl font-semibold text-gray-700 mb-4 text-center">
+            Agreement Details
+          </h3>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <strong className="block text-gray-600">Agreement Date:</strong>
+              <span>{formatDate(data.date)}</span>
+            </div>
+            <div>
+              <strong className="block text-gray-600">Apartment No:</strong>
+              <span>{data.apartmentNo || "Not Available"}</span>
+            </div>
+            <div>
+              <strong className="block text-gray-600">Block:</strong>
+              <span>{data.blockName || "Not Available"}</span>
+            </div>
+            <div>
+              <strong className="block text-gray-600">Floor No:</strong>
+              <span>{data.floorNo || "Not Available"}</span>
+            </div>
+          </div>
         </div>
       </div>
-     
     </div>
   );
 };

@@ -19,8 +19,8 @@ const Sidebar = () => {
 
 
     return (
-      <div className="bg-primary relative w-60 min-h-screen">
-        <div className="flex items-center bg-[#1f5b73] shadow-xl  gap-2 p-2">
+      <div className="bg-primary  sticky bottom-0 left-0 top-0 w-60 min-h-screen">
+        <div className="flex items-center  bg-[#1f5b73] shadow-xl  gap-2 p-2">
           <img
             className="w-10 h-10 rounded-full cursor-pointer"
             src={logo}
