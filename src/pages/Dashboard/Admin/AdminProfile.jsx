@@ -23,8 +23,8 @@ const AdminProfile = () => {
   // console.log('data',data?.total);
   
   return (
-    <div>
-      Admin profile
+    <div>p
+      
       <div className="">
         <div className="card card-side bg-base-100 shadow-xl">
           <figure>

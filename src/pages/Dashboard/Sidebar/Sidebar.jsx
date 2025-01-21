@@ -32,11 +32,13 @@ const Sidebar = () => {
         {role === "member" && <MemberMenu />}
         {role === "user" && <UserMenu />}
         <hr className=" border-[#1f5b73] border-2 mt-4" />
-        <button className="btn bg-[#1f5b73] mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden">
-          <Link className="flex items-center gap-2" to="/">
-            <FaHome className="text-xl" /> Home
-          </Link>
-        </button>
+        <Link
+          to="/"
+          className="btn bg-[#1f5b73] mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden"
+        >
+          <FaHome className="text-xl" /> Home
+        </Link>
+
         <div>
           <button
             onClick={logOutUser}
