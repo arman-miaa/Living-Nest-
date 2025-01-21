@@ -217,7 +217,7 @@ const Apartments = () => {
             <button
               key={page}
               onClick={() => setCurrentPage(page)}
-              className={`btn mr-2 border-orange-600 ${
+              className={`btn mr-2 border-orange-600 hover:bg-secondary ${
                 currentPage === page ? "btn-primary bg-accent" : "btn-outline"
               }`}
             >

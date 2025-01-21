@@ -60,7 +60,9 @@ const Navbar = () => {
               src="/logo.png"
               alt=""
             />
-            <a className=" text-lg md:text-xl text-white cursor-pointer hover:text-secondary">LivingNest</a>
+            <a className=" text-lg md:text-xl text-white cursor-pointer hover:text-secondary">
+              LivingNest
+            </a>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -76,7 +78,7 @@ const Navbar = () => {
                 role="button"
                 className="btn btn-ghost btn-circle avatar"
               >
-                <div className="w-10 rounded-full">
+                <div className="w-10 lg:w-12 rounded-full border-2 shadow-2xl">
                   <img
                     alt="User Avatar"
                     src={user.photoURL || userImg}
@@ -86,14 +88,22 @@ const Navbar = () => {
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
+                className="menu menu-sm flex dropdown-content justify-center  bg-base-100 rounded-box z-50 mt-3 w-36 p-2 shadow"
               >
-                <li>{user?.displayName}</li>
-                <li>
-                  <Link to="/dashboard">Dashboard</Link>
+                <li className="text-xl font-semibold text-accent text-center mb-1">
+                  {user?.displayName}
                 </li>
                 <li>
-                  <button onClick={handleLogOutUser} className="btn bg-primary">
+                  <button className="btn border-secondary hover:bg-secondary hover:text-white">
+                    {" "}
+                    <Link to="/dashboard">Dashboard</Link>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={handleLogOutUser}
+                    className="btn mt-2 border-secondary hover:bg-secondary hover:text-white"
+                  >
                     LogOut
                   </button>
                 </li>
