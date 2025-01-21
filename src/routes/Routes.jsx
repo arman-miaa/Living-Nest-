@@ -25,6 +25,7 @@ import ManageCoupons from "../pages/Dashboard/Admin/ManageCoupons";
 import UserRoute from "./UserRoute";
 import Payment from "../pages/Dashboard/Member/Payment";
 import Contact from "../pages/Contact";
+import Statistics from "../pages/Dashboard/Statistics/Statistics";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        index: true,
+        element: <Statistics/>,
+    },
       // admin menu
       {
         path: "adminProfile",

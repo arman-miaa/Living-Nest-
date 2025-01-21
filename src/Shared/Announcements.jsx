@@ -36,10 +36,10 @@ const Announcements = () => {
         {data.map((announcement) => (
           <div
             key={announcement._id}
-            className="card bg-white shadow-lg rounded-lg p-6 border-l-4 border-accent hover:shadow-xl transition-shadow"
+            className="card bg-white shadow-lg rounded-lg p-6 border-l-4 border-primary hover:shadow-xl transition-shadow"
           >
             <div className="flex items-center gap-3 mb-4">
-              <MdAnnouncement className="text-accent text-3xl" />
+              <MdAnnouncement className="text-primary text-3xl" />
               <h2 className="text-xl font-bold text-gray-700">
                 {announcement.title}
               </h2>

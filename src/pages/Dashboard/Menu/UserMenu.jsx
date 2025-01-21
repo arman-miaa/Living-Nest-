@@ -2,6 +2,7 @@ import { CgProfile } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import notFoundImg from '../../../../src/assets/user-icon.jpg';
+import { MdAnnouncement } from "react-icons/md";
 
 const UserMenu = () => {
   const { user } = useAuth();
@@ -43,7 +44,7 @@ const UserMenu = () => {
               }`
             }
           >
-            <CgProfile className="text-xl" /> Announcements
+            <MdAnnouncement className="text-xl" /> Announcements
           </NavLink>
         </ul>
       </div>

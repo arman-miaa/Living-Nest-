@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import Loading from "../../Loading";
+import SectionTitle from "../../../Shared/SectionTitle";
 
 const PaymentHistory = () => {
   const axiosSecure = useAxiosSecure();
@@ -22,7 +23,7 @@ const PaymentHistory = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-6">Payment History</h1>
+      <SectionTitle heading={`Payment History`} subHeading={`you can see here your rented apartmens details`}/>
       <div className="overflow-x-auto">
         <table className="table-auto border-collapse border border-gray-300 w-full">
           <thead>
