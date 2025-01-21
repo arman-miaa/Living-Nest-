@@ -35,7 +35,7 @@ const Contact = () => {
         />
       </div>
 
-      <div className="container mx-auto px-6 lg:px-32 flex items-center flex-col md:flex-row gap-2">
+      <div className="container mx-auto px-6 lg:px-32 flex items-center flex-col md:flex-row gap-8">
         {/* Contact Information */}
         <div className="flex-1 ">
           <Lottie animationData={submitLottieData}></Lottie>
@@ -68,6 +68,23 @@ const Contact = () => {
               <input
                 type="text"
                 placeholder="Enter your name"
+                className={`input w-full mt-2 border-accent bg-transparent input-bordered focus:outline-none focus:ring-2 ${
+                  darkMode ? "text-gray-400" : "text-black"
+                }`}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className={`label-text font-semibold ${
+                  darkMode ? "text-gray-400" : "text-black"
+                }`}
+              >
+                Subject
+              </label>
+              <input
+                type="text"
+                placeholder="Enter your Subject"
                 className={`input w-full mt-2 border-accent bg-transparent input-bordered focus:outline-none focus:ring-2 ${
                   darkMode ? "text-gray-400" : "text-black"
                 }`}
