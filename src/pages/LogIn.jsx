@@ -7,6 +7,7 @@ import Lottie from "lottie-react";
 import useAuth from "../Hooks/useAuth";
 import { useTheme } from "../hooks/ThemeProvider ";
 import { saveUser } from "../api/userApi";
+import Button from "../Shared/Button";
 
 const Login = () => {
   const { signInUser, signInWithGoogle, setUser } = useAuth();
@@ -60,7 +61,7 @@ const Login = () => {
         // style={{ backgroundColor: "#1D1D1D" }}
       >
         <Helmet>
-          <title>Login Page || CarePoint</title>
+          <title>Login Page || LivingNest</title>
         </Helmet>
         <div
           className={` shadow-xl mx-4 md:mx-0  p-4 rounded-xl ${
@@ -70,7 +71,7 @@ const Login = () => {
           {/* Header Section */}
           <div className="text-center">
             <h1
-              className={` text-2xl mt-4 md:text-3xl lg:text-5xl font-bold mb-4 text-emerald-700 ${
+              className={` text-2xl mt-4 md:text-3xl lg:text-5xl font-bold mb-4 text-secondary ${
                 darkMode ? "" : ""
               }`}
             >
@@ -81,7 +82,8 @@ const Login = () => {
                 darkMode ? "text-gray-400" : "text-black"
               }`}
             >
-              Log in to access volunteer opportunities and make a difference.
+              Log in to explore available apartments, manage your rental
+              agreements, and stay updated on the latest listings.
             </p>
           </div>
 
@@ -103,7 +105,7 @@ const Login = () => {
                   type="email"
                   name="email"
                   placeholder="Enter your email"
-                  className={`input  border-emerald-700 bg-transparent input-bordered focus:outline-none focus:ring-2 ${
+                  className={`input  border-accent bg-transparent input-bordered focus:outline-none focus:ring-2 ${
                     darkMode ? "text-gray-400" : "text-black"
                   }`}
                   required
@@ -125,7 +127,7 @@ const Login = () => {
                   type="password"
                   name="password"
                   placeholder="Enter your password"
-                  className={`input  border-emerald-700 bg-transparent input-bordered focus:outline-none focus:ring-2 ${
+                  className={`input  border-accent bg-transparent input-bordered focus:outline-none focus:ring-2 ${
                     darkMode ? "text-gray-400" : "text-black"
                   }`}
                   required
@@ -134,12 +136,13 @@ const Login = () => {
               {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
               {/* Login Button */}
               <div className="form-control mt-6">
-                <button
+                {/* <button
                   type="submit"
                   className="btn bg-emerald-700 text-white border-none hover:bg-emerald-800"
                 >
                   Login
-                </button>
+                </button> */}
+                <Button styleBtn={`LogIn`}/>
               </div>
 
               {/* Google Login */}
@@ -147,7 +150,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={handleSignInUserWithGoogle}
-                  className={`relative  py-2 px-4  bg-transparent isolation-auto z-10 border-2 border-emerald-700 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full hover:text-white before:-right-full before:hover:right-0 before:rounded-full before:bg-emerald-600 before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 inline-flex items-center justify-center text-sm font-semibold ${
+                  className={`relative  py-2 px-4  bg-transparent isolation-auto z-10 border-2 border-accent before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full hover:text-white before:-right-full before:hover:right-0 before:rounded-full before:bg-orange-500 before:-z-10 before:aspect-square before:hover:scale-150 overflow-hidden before:hover:duration-700 inline-flex items-center justify-center text-sm font-semibold ${
                     darkMode ? "text-white" : "text-black"
                   }   rounded-lg shadow-sm gap-x-2 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none`}
                 >
@@ -164,7 +167,7 @@ const Login = () => {
                 Don't have an account?{" "}
                 <Link
                   to="/signup"
-                  className="font-semibold underline text-emerald-700"
+                  className="font-semibold underline text-secondary"
                 >
                   Register
                 </Link>
