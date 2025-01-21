@@ -118,7 +118,8 @@ const router = createBrowserRouter([
 
       // member menu
       {
-        path: "memberProfile",
+        // index: true,
+        path: 'memberProfile',
         element: (
           <PrivateRoute>
             <MemberRoute>

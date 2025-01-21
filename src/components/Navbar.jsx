@@ -7,6 +7,7 @@ import Button from "../Shared/Button";
 const Navbar = () => {
 
   const { user, logOutUser } = useAuth();
+ 
   
     
     const links = (
