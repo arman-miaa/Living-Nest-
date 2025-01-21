@@ -5,6 +5,7 @@ import Loading from "../../Loading";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import SectionTitle from "../../../Shared/SectionTitle";
 
 const MakePayment = () => {
   const { user } = useAuth();
@@ -64,11 +65,15 @@ const MakePayment = () => {
 
   return (
     <div className="">
-      <h1 className="text-2xl font-bold mb-4">Make Payment</h1>
-      <form className="card-body" onSubmit={handlePayment}>
-        <div className="form-control">
+      <SectionTitle
+        heading="Make a Payment"
+        subHeading="Securely settle your dues and manage your rental payments with ease"
+      />
+
+      <form className="card-body w-full mx-4 md:w-1/2 md:mx-auto" onSubmit={handlePayment}>
+        <div className="form-control -mt-20">
           <label className="label">
-            <span className="label-text">Email</span>
+            <span className="label-text font-semibold">Email</span>
           </label>
           <input
             type="email"
@@ -79,7 +84,7 @@ const MakePayment = () => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Floor</span>
+            <span className="label-text font-semibold">Floor</span>
           </label>
           <input
             type="text"
@@ -90,7 +95,7 @@ const MakePayment = () => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Block</span>
+            <span className="label-text font-semibold">Block</span>
           </label>
           <input
             type="text"
@@ -101,7 +106,7 @@ const MakePayment = () => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Apartment No</span>
+            <span className="label-text font-semibold">Apartment No</span>
           </label>
           <input
             type="text"
@@ -112,7 +117,7 @@ const MakePayment = () => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Rent</span>
+            <span className="label-text font-semibold">Rent</span>
           </label>
           <input
             type="text"
@@ -123,7 +128,7 @@ const MakePayment = () => {
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Select Month</span>
+            <span className="label-text font-semibold">Select Month</span>
           </label>
           <select name="month" className="select select-bordered" required>
             <option value="">--Select Month--</option>
@@ -143,7 +148,7 @@ const MakePayment = () => {
         </div>
 
         <div className="form-control mt-6">
-          <button type="submit" className="btn btn-primary" disabled={hasPaid}>
+          <button type="submit" className="btn bg-secondary text-white hover:bg-orange-700" disabled={hasPaid}>
             {hasPaid ? "Payment Completed" : "Pay Now"}
           </button>
         </div>

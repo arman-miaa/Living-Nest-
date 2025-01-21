@@ -52,6 +52,7 @@ const Apartments = () => {
   }
 
   const handleAgreement = (apartment) => {
+    
     if (user) {
       const agreementData = {
         userName: user.displayName,
@@ -129,7 +130,10 @@ const Apartments = () => {
               required
             />
           </div>
-          <button type="submit" className="btn bg-secondary text-white hover:bg-orange-700 self-center md:mt-10">
+          <button
+            type="submit"
+            className="btn bg-secondary text-white hover:bg-orange-700 self-center md:mt-10"
+          >
             Search
           </button>
         </form>
@@ -192,11 +196,9 @@ const Apartments = () => {
                 ) : (
                   <div className="mt-auto">
                     {apartment.availability === "available" ? (
-                      <Button
-                        onClick={() => handleAgreement(apartment)}
-                        styleBtn="Agreement"
-                        width="w-full"
-                      />
+                      <div onClick={() => handleAgreement(apartment)}>
+                        <Button styleBtn="Agreement" width="w-full" />
+                      </div>
                     ) : (
                       <span className="text-gray-500 bg-red-200 text-center py-2 block rounded-md">
                         Already Rented
