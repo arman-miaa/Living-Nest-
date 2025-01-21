@@ -9,7 +9,7 @@ const Dashboard = () => {
         </div>
          
 
-        <div className="bg-blue-100 flex-1 ml-8">
+        <div className="bg-blue-100 flex-1 ">
           <Outlet></Outlet>
         </div>
       </div>

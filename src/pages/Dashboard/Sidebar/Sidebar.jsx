@@ -19,34 +19,36 @@ const Sidebar = () => {
 
 
     return (
-      <div className="bg-primary  sticky bottom-0 left-0 top-0 w-60 min-h-screen">
-        <div className="flex items-center  bg-[#1f5b73] shadow-xl  gap-2 p-2">
-          <img
-            className="w-10 h-10 rounded-full cursor-pointer"
-            src={logo}
-            alt=""
-          />
-          <h2 className="text-white font-semibold">LivingNest - Dashboard</h2>
-        </div>
-        {role === "admin" && <AdminMenu />}
-        {role === "member" && <MemberMenu />}
-        {role === "user" && <UserMenu />}
-        <hr className=" border-[#1f5b73] border-2 mt-4" />
-        <Link
-          to="/"
-          className="btn bg-[#1f5b73] mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden"
-        >
-          <FaHome className="text-xl" /> Home
-        </Link>
-
-        <div>
-          <button
-            onClick={logOutUser}
-            className="btn bg-[#1f5b73] hover:bg-secondary flex justify-start pl-6 text-white border-none w-full absolute shadow-sm bottom-0 mb-4"
+      <div className="hidden md:flex">
+        <div className="bg-primary  sticky bottom-0 left-0 top-0 w-60 min-h-screen">
+          <div className="flex items-center  bg-[#1f5b73] shadow-xl  gap-2 p-2">
+            <img
+              className="w-10 h-10 rounded-full cursor-pointer"
+              src={logo}
+              alt=""
+            />
+            <h2 className="text-white font-semibold">LivingNest - Dashboard</h2>
+          </div>
+          {role === "admin" && <AdminMenu />}
+          {role === "member" && <MemberMenu />}
+          {role === "user" && <UserMenu />}
+          <hr className=" border-[#1f5b73] border-2 mt-4" />
+          <Link
+            to="/"
+            className="btn bg-[#1f5b73] mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden"
           >
-            {" "}
-            <GrLogout className="text-xl" /> LogOut{" "}
-          </button>
+            <FaHome className="text-xl" /> Home
+          </Link>
+
+          <div>
+            <button
+              onClick={logOutUser}
+              className="btn bg-[#1f5b73] hover:bg-secondary flex justify-start pl-6 text-white border-none w-full absolute shadow-sm bottom-0 mb-4"
+            >
+              {" "}
+              <GrLogout className="text-xl" /> LogOut{" "}
+            </button>
+          </div>
         </div>
       </div>
     );
