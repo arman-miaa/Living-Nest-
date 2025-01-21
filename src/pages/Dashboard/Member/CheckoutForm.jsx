@@ -118,7 +118,7 @@ const CheckoutForm = ({
             },
           }}
         />
-        <button className="btn btn-primary mt-4" type="submit" disabled={!stripe || !clientSecret}>
+        <button className="btn bg-orange-500 hover:bg-orange-600 text-white mt-4" type="submit" disabled={!stripe || !clientSecret}>
           Pay ${amount.toFixed(2)}
         </button>
         {transectionId && (

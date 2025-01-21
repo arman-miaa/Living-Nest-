@@ -5,17 +5,17 @@ import { useLocation, Navigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
- // Custom hook for Axios instance
+import SectionTitle from "../../../Shared/SectionTitle";
+import Button from "../../../Shared/Button";
 
 const Payment = () => {
   const axiosSecure = useAxiosSecure();
   const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
- 
-  const location = useLocation();
 
+  const location = useLocation();
   const [coupon, setCoupon] = useState("");
-  const [discount, setDiscount] = useState(0); 
-  const [finalAmount, setFinalAmount] = useState(location.state?.rent || 0); 
+  const [discount, setDiscount] = useState(0);
+  const [finalAmount, setFinalAmount] = useState(location.state?.rent || 0);
 
   if (
     !location.state ||
@@ -50,54 +50,72 @@ const Payment = () => {
         toast.error("Coupon is unavailable or invalid.");
       }
     } catch (error) {
-      
       toast.error("Failed to validate coupon. Please try again.");
     }
   };
 
   return (
-    <div className="mt-8">
-      <h1 className="text-2xl font-bold">Payment Page</h1>
+    <div className="p-6 space-y-8">
+      <SectionTitle
+        heading="Payment Page"
+        subHeading="You can make a payment here and apply a coupon for discounts"
+      />
 
-      <div className="flex gap-2 items-center">
-        <div className="form-control flex">
-          <label className="label">
-            <span className={`label-text font-semibold `}>Apply Coupon</span>
-          </label>
-          <input
-            type="text"
-            placeholder="Apply Coupon"
-            onChange={(e) => setCoupon(e.target.value)}
-            className={`input border-emerald-700 bg-transparent input-bordered focus:outline-none focus:ring-2 `}
-          />
+      <div className="space-y-4">
+        {/* Coupon Section */}
+        <div className="flex flex-col md:flex-row  items-center gap-4">
+          <div className="w-full md:w-1/2">
+            <label className="block font-semibold text-lg text-gray-700">
+              Apply Coupon
+            </label>
+            <input
+              type="text"
+              placeholder="Enter coupon code"
+              onChange={(e) => setCoupon(e.target.value)}
+              className="input input-bordered mt-1 w-full border-emerald-700 focus:ring-2 focus:outline-none"
+            />
+          </div>
+          <div
+            onClick={handleApplyCoupon}
+            className="md:mt-8 border-4 w-full md:w-auto"
+          >
+            {" "}
+            <Button styleBtn="Apply" />
+          </div>
         </div>
-        <button onClick={handleApplyCoupon} className="btn btn-primary mt-8">
-          Apply
-        </button>
+
+        {/* Rent Details */}
+        <div>
+          <h2 className="text-xl font-semibold">
+            Original Rent: ${location.state.rent.toFixed(2)}
+          </h2>
+          {discount > 0 && (
+            <h3 className="text-lg text-green-500">
+              Discount Applied: {discount}% (New Total: $
+              {finalAmount.toFixed(2)})
+            </h3>
+          )}
+        </div>
       </div>
 
-      <h2 className="mt-4 text-lg font-semibold">
-        Original Rent: ${location.state.rent.toFixed(2)}
-      </h2>
-      {discount > 0 && (
-        <h3 className="text-green-500">
-          Discount Applied: {discount}% (New Total: ${finalAmount.toFixed(2)})
-        </h3>
-      )}
-
-      <h2 className="mt-12">Please make your payment with your card:</h2>
-      <Elements stripe={stripePromise}>
-        <CheckoutForm
-          amount={finalAmount} // Final amount after applying discount
-          email={location.state.email}
-          selectedMonth={location.state.selectedMonth}
-          floorNo={location.state.floorNo}
-          blockName={location.state.blockName}
-          apartmentNo={location.state.apartmentNo}
-          apartmentId={location.state.apartmentId}
-          originalRent={location.state.rent} // Original rent before discount
-        />
-      </Elements>
+      {/* Payment Section */}
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold">
+          Please make your payment using your card:
+        </h2>
+        <Elements stripe={stripePromise}>
+          <CheckoutForm
+            amount={finalAmount}
+            email={location.state.email}
+            selectedMonth={location.state.selectedMonth}
+            floorNo={location.state.floorNo}
+            blockName={location.state.blockName}
+            apartmentNo={location.state.apartmentNo}
+            apartmentId={location.state.apartmentId}
+            originalRent={location.state.rent}
+          />
+        </Elements>
+      </div>
     </div>
   );
 };
