@@ -7,8 +7,9 @@ import { Helmet } from "react-helmet";
 import { useTheme } from "../hooks/ThemeProvider ";
 import Lottie from "lottie-react";
 import useAuth from "../Hooks/useAuth";
-import lottieSignUp from "../../src/assets/lottie/signup.json";
+import lottieSignUp from "../../src/assets/lottie/register.json";
 import { saveUser } from "../api/userApi";
+import Button from "../Shared/Button";
 
 const SignUp = () => {
   const { createUser, setUser, updateUserProfile } = useAuth();
@@ -77,18 +78,21 @@ const SignUp = () => {
       <Helmet>
         <title>SignUp Page || LivingNest</title>
       </Helmet>
-      <div className="flex items-center justify-between flex-col md:flex-row">
-        <div className="flex-1">
-          <Lottie animationData={lottieSignUp}></Lottie>
+      <div className="flex items-center justify-between gap-8 flex-col md:flex-row">
+        <div className="flex-1 lg:hidden">
+          <Lottie animationData={lottieSignUp} />
+        </div>
+        <div className="flex-1 hidden lg:flex">
+          <Lottie animationData={lottieSignUp} style={{ width: 400 }} />
         </div>
         <div
-          className={`${
+          className={`flex-1 ${
             darkMode ? "bg-gray-800 border-emerald-800 border-2" : "bg-base-200"
           } shadow-xl card flex-1 w-full max-w-md  rounded-lg mt-6`}
         >
           <div className="text-center">
             <h1
-              className={` text-2xl mt-4 md:text-3xl lg:text-5xl font-bold mb-4 text-emerald-700 ${
+              className={` text-2xl mt-4 md:text-3xl lg:text-5xl font-bold mb-4 text-secondary${
                 darkMode ? "" : ""
               }`}
             >
@@ -99,7 +103,8 @@ const SignUp = () => {
                 darkMode ? "text-gray-400" : "text-black"
               }`}
             >
-              Sign up to join and explore exciting volunteer opportunities
+              Sign up to unlock exclusive access to LivingNest and start your
+              journey to a better living experience
             </p>
           </div>
 
@@ -118,7 +123,7 @@ const SignUp = () => {
                 type="text"
                 name="name"
                 placeholder="Enter your name"
-                className={`input  border-emerald-700 bg-transparent input-bordered focus:outline-none focus:ring-2 ${
+                className={`input  border-accent bg-transparent input-bordered focus:outline-none focus:ring-2 ${
                   darkMode ? "text-gray-400" : "text-black"
                 }`}
                 required
@@ -139,7 +144,7 @@ const SignUp = () => {
                 name="photo"
                 placeholder="Enter your photo URL"
                 required
-                className={`input  border-emerald-700 bg-transparent input-bordered focus:outline-none focus:ring-2 ${
+                className={`input  border-accent bg-transparent input-bordered focus:outline-none focus:ring-2 ${
                   darkMode ? "text-gray-400" : "text-black"
                 }`}
               />
@@ -158,7 +163,7 @@ const SignUp = () => {
                 type="email"
                 name="email"
                 placeholder="Enter your email"
-                className={`input  border-emerald-700 bg-transparent input-bordered focus:outline-none focus:ring-2 ${
+                className={`input  border-accent bg-transparent input-bordered focus:outline-none focus:ring-2 ${
                   darkMode ? "text-gray-400" : "text-black"
                 }`}
                 required
@@ -178,7 +183,7 @@ const SignUp = () => {
                 type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Enter your password"
-                className={`input  border-emerald-700 bg-transparent input-bordered focus:outline-none focus:ring-2 ${
+                className={`input  border-accent bg-transparent input-bordered focus:outline-none focus:ring-2 ${
                   darkMode ? "text-gray-400" : "text-black"
                 }`}
                 required
@@ -186,16 +191,17 @@ const SignUp = () => {
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="btn btn-xs bg-emerald-600 text-gray-200 hover:bg-emerald-700 border-none absolute text-xl  right-12 mt-12"
+                className="btn btn-xs bg-secondary text-gray-200 hover:bg-emerald-700 border-none absolute text-xl  right-12 mt-12"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
             <div className="form-control mt-6">
-              <button className="btn text-white bg-emerald-700 border-none hover:bg-emerald-800">
+              {/* <button className="btn text-white bg-emerald-700 border-none hover:bg-emerald-800">
                 Sign Up
-              </button>
+              </button> */}
+              <Button styleBtn={`Sign Up`}/>
               <p
                 className={`label-text font-semibold text-center mt-4 ${
                   darkMode ? "text-gray-400" : "text-black"
@@ -204,7 +210,7 @@ const SignUp = () => {
                 Already have an account?{" "}
                 <Link
                   to="/login"
-                  className="font-semibold underline text-emerald-700"
+                  className="font-semibold underline text-secondary"
                 >
                   Login
                 </Link>
