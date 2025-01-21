@@ -19,7 +19,7 @@ const Announcements = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10">
+    <div className="min-h-screen bg-gray-50 ">
       {/* Section Title */}
       <SectionTitle
         heading="Announcements"
@@ -27,7 +27,7 @@ const Announcements = () => {
       />
 
       {/* Announcement Count */}
-      <p className="text-accent text-center text-lg mb-6">
+      <p className="text-accent text-center text-lg mb-6 -mt-10">
         Total Announcements: <span className="font-bold text-secondary">{data.length}</span>
       </p>
 

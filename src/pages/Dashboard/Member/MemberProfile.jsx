@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Loading from "../../Loading";
 import notFoundImg from "../../../../src/assets/not-found.png";
 import SectionTitle from "../../../Shared/SectionTitle";
+import { FaRegCalendarAlt, FaHome, FaBuilding } from "react-icons/fa";
 
 const MemberProfile = () => {
   const { user } = useAuth();
@@ -23,23 +24,24 @@ const MemberProfile = () => {
     if (!date) return "Not Available";
     return new Intl.DateTimeFormat("en-US", {
       year: "numeric",
-      month: "long",
+      month: "numeric",
       day: "numeric",
     }).format(new Date(date));
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-200 py-10">
-      <SectionTitle
+    <div className="min-h-screen bg-gray-100 p-8 md:p-16 ">
+      {/* <SectionTitle
         heading="Welcome to Your Profile"
         subHeading="Manage your details and agreements with ease."
-      />
+      /> */}
 
-      <div className="bg-white shadow-2xl rounded-xl w-full max-w-3xl mx-auto p-8">
-        <div className="relative">
-          {/* Cover Section */}
-          <div className="h-40 bg-gradient-to-r from-accent to-[#1f5b73] rounded-t-lg"></div>
-          {/* Profile Image */}
+      <div className="bg-white mx-auto  p-8 rounded-xl shadow-xl max-w-3xl relative">
+        {/* Cover Image and Profile */}
+        <div className="relative mb-16">
+          <div className="h-40 bg-gradient-to-r from-primary to-[#1f5b73] rounded-t-lg">
+            <h1 className="text-center text-2xl md:text-3xl text-secondary pt-8">Welcome to Your Profile</h1>
+          </div>
           <img
             src={user.photoURL || notFoundImg}
             onError={(e) => (e.target.src = notFoundImg)}
@@ -49,34 +51,41 @@ const MemberProfile = () => {
         </div>
 
         {/* User Info */}
-        <div className="text-center mt-16">
-          <h2 className="text-2xl font-bold text-gray-800">
-            {user.displayName}
-          </h2>
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-accent">{user.displayName}</h2>
           <p className="text-gray-500">{user.email}</p>
         </div>
 
         {/* Agreement Info */}
-        <div className="mt-8 border-t pt-6">
+        <div className="border-t pt-6">
           <h3 className="text-xl font-semibold text-gray-700 mb-4 text-center">
             Agreement Details
           </h3>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <strong className="block text-gray-600">Agreement Date:</strong>
-              <span>{formatDate(data.date)}</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="flex items-center">
+              <FaRegCalendarAlt className="text-primary mr-2" />
+              <span>
+                <strong>Agreement Date:</strong> {formatDate(data.date)}
+              </span>
             </div>
-            <div>
-              <strong className="block text-gray-600">Apartment No:</strong>
-              <span>{data.apartmentNo || "Not Available"}</span>
+            <div className="flex items-center">
+              <FaHome className="text-primary mr-2" />
+              <span>
+                <strong>Apartment No:</strong>{" "}
+                {data.apartmentNo || "Not Available"}
+              </span>
             </div>
-            <div>
-              <strong className="block text-gray-600">Block:</strong>
-              <span>{data.blockName || "Not Available"}</span>
+            <div className="flex items-center">
+              <FaBuilding className="text-primary mr-2" />
+              <span>
+                <strong>Block:</strong> {data.blockName || "Not Available"}
+              </span>
             </div>
-            <div>
-              <strong className="block text-gray-600">Floor No:</strong>
-              <span>{data.floorNo || "Not Available"}</span>
+            <div className="flex items-center">
+              <FaHome className="text-primary mr-2" />
+              <span>
+                <strong>Floor No:</strong> {data.floorNo || "Not Available"}
+              </span>
             </div>
           </div>
         </div>
