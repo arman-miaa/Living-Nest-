@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import notFoundImg from '../../../../src/assets/user-icon.jpg'
 
-const MemberMenu = () => {
+const MemberMenu = ({onclose}) => {
   const { user } = useAuth();
 
   return (
@@ -15,16 +15,19 @@ const MemberMenu = () => {
         <img
           className="w-16 h-16 rounded-full border-2 border-white shadow-lg mb-3"
           src={user.photoURL || notFoundImg}
-          onError={(e) => e.target.src=notFoundImg}
+          onError={(e) => (e.target.src = notFoundImg)}
           alt="Profile"
         />
-        <h4 className="text-lg font-semibold text-white -mt-2">{user.displayName}</h4>
+        <h4 className="text-lg font-semibold text-white -mt-2">
+          {user.displayName}
+        </h4>
         <h3 className="text-sm text-gray-300">Member</h3>
       </div>
 
       {/* Menu Items */}
       <ul className="mt-8">
         <NavLink
+          onClick={onclose}
           to="/dashboard/memberProfile"
           className={({ isActive }) =>
             `btn bg-[#1f5b73] rounded-none mt-2 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
@@ -35,6 +38,7 @@ const MemberMenu = () => {
           <CgProfile className="text-xl" /> My Profile
         </NavLink>
         <NavLink
+          onClick={onclose}
           to="/dashboard/makePayment"
           className={({ isActive }) =>
             `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
@@ -45,6 +49,7 @@ const MemberMenu = () => {
           <MdOutlinePayment className="text-xl" /> Make Payment
         </NavLink>
         <NavLink
+          onClick={onclose}
           to="/dashboard/paymentHistory"
           className={({ isActive }) =>
             `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
@@ -55,6 +60,7 @@ const MemberMenu = () => {
           <FaHistory className="text-xl" /> Payment History
         </NavLink>
         <NavLink
+          onClick={onclose}
           to="/dashboard/memberAnnouncement"
           className={({ isActive }) =>
             `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${

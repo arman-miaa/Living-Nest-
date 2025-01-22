@@ -106,7 +106,7 @@ const CheckoutForm = ({
           } else {
             toast.warn(res2.data.message || "Could not update apartment.");
           }
-          console.log("Update response:", res2.data); // Debugging
+          // console.log("Update response:", res2.data); 
         } catch (error) {
           console.error("Error updating apartment:", error);
           toast.error("Failed to update apartment availability.");

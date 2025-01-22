@@ -8,7 +8,7 @@ const UserProfile = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 py-8">
-      <div className="bg-white mx-auto p-8 rounded-xl shadow-xl max-w-3xl relative">
+      <div className="bg-white mx-auto p-8 rounded-xl mt-20 shadow-xl max-w-3xl relative">
         {/* Cover Image and Profile */}
         <div className="relative mb-16">
           <div className="h-40 bg-gradient-to-r from-primary to-[#1f5b73] rounded-t-lg">

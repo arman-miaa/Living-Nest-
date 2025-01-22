@@ -9,7 +9,7 @@ const Dashboard = () => {
         </div>
          
 
-        <div className=" flex-1 px-4 ">
+        <div className=" flex-1 px-4 md:ml-60 ">
           <Outlet></Outlet>
         </div>
       </div>

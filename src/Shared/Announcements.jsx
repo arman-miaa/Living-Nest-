@@ -19,7 +19,7 @@ const Announcements = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="min-h-screen bg-gray-50 ">
+    <div className="min-h-screen bg-gray-50 mb-12">
       {/* Section Title */}
       <SectionTitle
         heading="Announcements"
