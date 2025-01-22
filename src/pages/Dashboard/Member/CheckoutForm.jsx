@@ -1,7 +1,7 @@
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import { replace, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../../Hooks/useAuth";
 
@@ -31,9 +31,10 @@ const CheckoutForm = ({
         .then((res) => {
           setClientSecret(res.data.clientSecret);
         })
-        .catch((error) =>
-          toast.error("Error creating payment intent:", error)
-        );
+        .catch((error) => {
+          console.error("Error creating payment intent:", error);
+          toast.error("Error creating payment intent!");
+        });
     }
   }, [amount, axiosSecure]);
 
@@ -90,11 +91,29 @@ const CheckoutForm = ({
         selectedMonth,
       };
 
-      const res = await axiosSecure.post("/payment", payment)
-      
+      const res = await axiosSecure.post("/payment", payment);
+
       if (res.data) {
         toast.success("Payment Successful!");
-        navigate("/dashboard/paymentHistory", { replace: true }); 
+
+        try {
+          // Call the update apartment API
+          const res2 = await axiosSecure.patch(
+            `/updateApartment/${apartmentId}`
+          );
+          if (res2.data.success) {
+            toast.success("Apartment updated to unavailable!");
+          } else {
+            toast.warn(res2.data.message || "Could not update apartment.");
+          }
+          console.log("Update response:", res2.data); // Debugging
+        } catch (error) {
+          console.error("Error updating apartment:", error);
+          toast.error("Failed to update apartment availability.");
+        }
+
+        // Navigate to payment history
+        navigate("/dashboard/paymentHistory", { replace: true });
       }
     }
   };
@@ -118,7 +137,11 @@ const CheckoutForm = ({
             },
           }}
         />
-        <button className="btn bg-orange-500 hover:bg-orange-600 text-white mt-4" type="submit" disabled={!stripe || !clientSecret}>
+        <button
+          className="btn bg-orange-500 hover:bg-orange-600 text-white mt-4"
+          type="submit"
+          disabled={!stripe || !clientSecret}
+        >
           Pay ${amount.toFixed(2)}
         </button>
         {transectionId && (
@@ -126,10 +149,10 @@ const CheckoutForm = ({
             Your Transaction Id: {transectionId}
           </p>
         )}
+        {error && <p className="text-red-500 mt-2">{error}</p>}
       </form>
     </div>
   );
 };
 
 export default CheckoutForm;
-
