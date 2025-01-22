@@ -144,7 +144,7 @@ const ManageCoupons = () => {
                   ) : (
                     <FaCheckCircle className="text-green-500 text-lg" />
                   )}
-                  <span className="hidden lg:flex">Toggle</span>
+                  <span className="hidden lg:flex text-gray-700">Toggle</span>
                 </button>
               </td>
             </tr>

@@ -34,7 +34,7 @@ const Sidebar = () => {
         <hr className=" border-[#1f5b73] border-2 mt-4" />
         <Link
           to="/"
-          className="btn bg-[#1f5b73] mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden"
+          className="btn bg-[#1f5b73] mt-4 rounded-none hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden"
         >
           <FaHome className="text-xl" /> Home
         </Link>
@@ -42,7 +42,7 @@ const Sidebar = () => {
         <div>
           <button
             onClick={logOutUser}
-            className="btn bg-[#1f5b73] hover:bg-secondary flex justify-start pl-6 text-white border-none w-full absolute shadow-sm bottom-0 mb-4"
+            className="btn bg-[#1f5b73] hover:bg-secondary rounded-none flex justify-start pl-6 text-white border-none w-full absolute shadow-sm bottom-0 mb-4"
           >
             {" "}
             <GrLogout className="text-xl" /> LogOut{" "}
