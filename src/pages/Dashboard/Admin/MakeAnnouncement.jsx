@@ -1,66 +1,77 @@
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-
+import SectionTitle from "../../../Shared/SectionTitle";
+import Button from "../../../Shared/Button";
 
 const MakeAnnouncement = () => {
-    const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
 
-    const handleSubmitForm = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const title = form.title.value;
-        const description = form.description.value;
-        // console.log(title, description);
-        
-        const announcement = {
-            title,
-            description,
+  const handleSubmitForm = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const title = form.title.value;
+    const description = form.description.value;
+
+    const announcement = { title, description };
+
+    axiosSecure
+      .post("/announcements", announcement)
+      .then((res) => {
+        if (res.data.insertedId) {
+          toast.success("Announcement Posted on database successfully!");
+          form.reset();
         }
+      })
+      .catch((error) => {
+        console.error("Announcement upload failed", error);
+        toast.error("Announcement upload failed");
+      });
+  };
 
-        axiosSecure.post("/announcements", announcement)
-          .then(res => {
-            if (res.data.insertedId) {
-                toast.success('Announcement Posted on database successfully!')
-              }
-                console.log("announcement upload successfully", res.data);
-            })
-            .catch(errro => {
-            console.log('announcement uploaded failed', errro);
-            toast.error('announcement uploaded failed');
-        })
-    }
-    return (
-      <div>
-        make announcement ...
-        <form onSubmit={handleSubmitForm} className="card-body">
+  return (
+    <div className="min-h-screen bg-gray-100 ">
+      <SectionTitle
+        heading="Make Announcement"
+        subHeading="Post an announcement for members and users"
+      />
+      <div className="bg-white shadow-md rounded-lg p-6 max-w-3xl mx-auto">
+        <form onSubmit={handleSubmitForm} className="space-y-6">
+          {/* Title */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Title</span>
+              <span className="label-text font-semibold">Title</span>
             </label>
             <input
               type="text"
-              placeholder="Title"
+              placeholder="Enter the title"
               name="title"
-              className="input input-bordered"
+              className="input input-bordered w-full"
               required
             />
           </div>
+
+          {/* Description */}
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Description</span>
+              <span className="label-text font-semibold">Description</span>
             </label>
             <textarea
-              className="textarea textarea-bordered resize-none"
-                        placeholder="description"
-                        name="description"
+              className="textarea textarea-bordered w-full resize-none"
+              placeholder="Enter the description"
+              name="description"
+              rows={5}
+              required
             ></textarea>
           </div>
-          <div className="form-control mt-6">
-            <button className="btn btn-primary">Submit</button>
+
+          {/* Submit Button */}
+          <div className="form-control mt-4">
+            <Button styleBtn="Submit" />
           </div>
         </form>
       </div>
-    );
+    </div>
+  );
 };
 
 export default MakeAnnouncement;

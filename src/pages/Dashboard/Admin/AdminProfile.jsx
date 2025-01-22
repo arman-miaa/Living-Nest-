@@ -5,7 +5,7 @@ import Loading from "../../Loading";
 
 const AdminProfile = () => {
   const { user,loader } = useAuth();
-  console.log(user);
+
   const axiosSequre = useAxiosSecure();
   const {
     data = [],
@@ -23,9 +23,10 @@ const AdminProfile = () => {
   // console.log('data',data?.total);
   
   return (
-    <div>p
+    <div>
       
       <div className="">
+        
         <div className="card card-side bg-base-100 shadow-xl">
           <figure>
             <img src={user.photoURL} alt="Movie" />
