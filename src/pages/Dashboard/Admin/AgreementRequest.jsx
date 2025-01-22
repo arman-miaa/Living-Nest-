@@ -1,5 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import SectionTitle from "../../../Shared/SectionTitle";
+import Loading from "../../Loading";
+import { toast } from "react-toastify";
+import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
+import { MdApartment } from "react-icons/md";
+import { FiUser } from "react-icons/fi";
+import { BsFillCalendarCheckFill } from "react-icons/bs";
 
 const AgreementRequest = () => {
   const axiosSecure = useAxiosSecure();
@@ -17,42 +24,44 @@ const AgreementRequest = () => {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const handleAcceptBtn = (id) => {
-      console.log(id);
-      
-      axiosSecure.patch(`/acceptUser/${id}`)
-          .then(res => {
-              console.log('done update delete and change role', res.data);
-              refetch();
-          })
-          .catch(error => {
-          console.log('failed data updated deleted and changed',error);
+    axiosSecure
+      .patch(`/acceptUser/${id}`)
+      .then(() => {
+        toast.success("User accepted successfully!");
+        refetch();
       })
+      .catch(() => {
+        toast.error("Failed to accept user. Please try again.");
+      });
   };
+
   const handleRejectBtn = (id) => {
-    //   console.log(id);
-      
-      axiosSecure
-        .patch(`/rejectedUser/${id}`)
-        .then((res) => {
-          console.log("rejected agreement", res.data);
-          refetch();
-        })
-        .catch((error) => {
-          console.log("failed rejected", error);
-        });
+    axiosSecure
+      .patch(`/rejectedUser/${id}`)
+      .then(() => {
+        toast.success("User rejected successfully!");
+        refetch();
+      })
+      .catch(() => {
+        toast.error("Failed to reject user. Please try again.");
+      });
   };
 
   return (
-    <div>
-      <h1>Agreement Requests</h1>
-      <p>Total Requests: {data.length}</p>
-      <div className="grid grid-cols-4 gap-4">
+    <div className="min-h-screen p-4 md:p-6 bg-gray-50">
+      <SectionTitle
+        heading="Agreement Requests"
+        subHeading="Manage pending agreement requests here"
+      />
+      <p className="text-xl text-center text-accent -mt-12">
+        Total Requests: <span className="text-secondary">{data.length}</span>
+      </p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {data.map((apartment) => {
-          // Format the date for better readability
           const formattedDate = new Date(apartment.date).toLocaleDateString(
             "en-US",
             {
@@ -63,27 +72,52 @@ const AgreementRequest = () => {
           );
 
           return (
-            <div key={apartment._id} className="card bg-base-100 shadow-xl">
-              <h2>{apartment.userName}</h2>
-              <h2>{apartment.userEmail}</h2>
-              <div className="card-body">
-                <h2 className="card-title">Floor No: {apartment.floorNo}</h2>
-                <p>Block Name: {apartment.blockName}</p>
-                <p>Apartment No: {apartment.apartmentNo}</p>
-                <p>Rent: {apartment.rent}</p>
-                <p> {formattedDate}</p>
-                <div className="flex justify-between">
+            <div
+              key={apartment._id}
+              className="card bg-white shadow-md rounded-lg overflow-hidden"
+            >
+              <div className="card-body p-4">
+                <h2 className="font-bold text-lg text-primary flex items-center gap-2">
+                  <FiUser className="text-primary" /> {apartment.userName}
+                </h2>
+                <p className="text-sm text-gray-600 flex items-center gap-2">
+                  <FiUser className="text-secondary" /> {apartment.userEmail}
+                </p>
+                <hr className="my-2" />
+                <p className="flex items-center gap-2">
+                  <MdApartment className="text-primary" /> Floor No:{" "}
+                  <strong>{apartment.floorNo}</strong>
+                </p>
+                <p className="flex items-center gap-2">
+                  <MdApartment className="text-accent" /> Block Name:{" "}
+                  <strong>{apartment.blockName}</strong>
+                </p>
+                <p className="flex items-center gap-2">
+                  <MdApartment className="text-secondary" /> Apartment No:{" "}
+                  <strong>{apartment.apartmentNo}</strong>
+                </p>
+                <p className="flex items-center gap-2">
+                  <FaCheckCircle className="text-green-500" /> Rent:{" "}
+                  <strong>${apartment.rent}</strong>
+                </p>
+                <p className="text-sm text-gray-500 flex items-center gap-2 mt-2">
+                  <BsFillCalendarCheckFill className="text-gray-500" /> Date:{" "}
+                  {formattedDate}
+                </p>
+                <div className="flex justify-between mt-4">
                   <button
                     onClick={() => handleAcceptBtn(apartment._id)}
-                    className="btn bg-primary text-white"
+                    className="btn bg-primary text-white px-4 py-2 rounded-md shadow hover:bg-accent flex items-center gap-2"
                   >
+                    <FaCheckCircle />
                     Accept
                   </button>
                   <button
                     onClick={() => handleRejectBtn(apartment._id)}
-                    className="btn bg-red-500 text-white"
+                    className="btn bg-red-500 text-white px-4 py-2 rounded-md shadow hover:bg-red-600 flex items-center gap-2"
                   >
-                    rejected
+                    <FaTimesCircle />
+                    Reject
                   </button>
                 </div>
               </div>

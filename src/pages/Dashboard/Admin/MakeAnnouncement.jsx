@@ -29,12 +29,12 @@ const MakeAnnouncement = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 ">
+    <div className="min-h-[calc(100vh-50px)] bg-gray-100 ">
       <SectionTitle
         heading="Make Announcement"
         subHeading="Post an announcement for members and users"
       />
-      <div className="bg-white shadow-md rounded-lg p-6 max-w-3xl mx-auto">
+      <div className="bg-white shadow-md rounded-lg px-6 max-w-3xl mx-auto">
         <form onSubmit={handleSubmitForm} className="space-y-6">
           {/* Title */}
           <div className="form-control">
@@ -65,7 +65,7 @@ const MakeAnnouncement = () => {
           </div>
 
           {/* Submit Button */}
-          <div className="form-control mt-4">
+          <div className="form-control mt-4 pb-6">
             <Button styleBtn="Submit" />
           </div>
         </form>
