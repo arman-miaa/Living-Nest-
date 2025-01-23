@@ -24,6 +24,7 @@ const Apartments = () => {
   const [minRent, setMinRent] = useState(0);
   const [maxRent, setMaxRent] = useState(0);
   const navigate = useNavigate();
+  const [loadingPagination, setLoadingPagination] = useState(false); 
 
   const numberOfPages = Math.ceil(count / itemsPerPage);
   const pages = [...Array(numberOfPages).keys()];
@@ -35,16 +36,18 @@ const Apartments = () => {
   } = useQuery({
     queryKey: ["apartments", currentPage, itemsPerPage, minRent, maxRent],
     queryFn: async () => {
+      setLoadingPagination(true)
       const response = await axiosPublic.get(
         `/apartments?page=${currentPage}&limit=${itemsPerPage}&minRent=${minRent}&maxRent=${maxRent}`
       );
       setCount(response.data.total);
+      setLoadingPagination(false)
       return response.data.apartments;
     },
   });
 
   // console.log(data);
-  if (loading || isLoading) {
+  if (loading || isLoading || loadingPagination) {
     return <Loading />;
   }
 
