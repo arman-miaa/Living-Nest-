@@ -21,7 +21,7 @@ const MakePayment = () => {
       return res.data;
     },
   });
-  // console.log(data);
+
   
 
   // Check if the user has already made a payment

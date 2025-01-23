@@ -46,7 +46,7 @@ const Apartments = () => {
     },
   });
 
-  // console.log(data);
+
   if (loading || isLoading || loadingPagination) {
     return <Loading />;
   }

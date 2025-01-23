@@ -25,7 +25,7 @@ const SignUp = () => {
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, photo, email, password);
+
 
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z]).{6,}$/;
     if (!passwordRegex.test(password)) {
@@ -51,7 +51,7 @@ const SignUp = () => {
             navigate("/");
           })
           .catch((error) => {
-            console.log("Profile update failed. Please try again.", error);
+         
             toast.error("Profile update failed. Please try again.");
           });
       })

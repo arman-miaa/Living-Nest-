@@ -16,7 +16,7 @@ createRoot(document.getElementById("root")).render(
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <RouterProvider router={router}></RouterProvider>
-          <ToastContainer position="top-center" autoClose={3000} />
+          <ToastContainer position="top-center" autoClose={4000} />
         </ThemeProvider>
       </QueryClientProvider>
     </AuthProvider>

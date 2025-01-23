@@ -34,7 +34,7 @@ const CheckoutForm = ({
           setClientSecret(res.data.clientSecret);
         })
         .catch((error) => {
-          console.error("Error creating payment intent:", error);
+        
           toast.error("Error creating payment intent!");
         });
     }
@@ -106,13 +106,13 @@ const CheckoutForm = ({
             `/updateApartment/${apartmentId}`
           );
           if (res2.data.success) {
-            // toast.success("Apartment updated to unavailable!");
+           
           } else {
-            // toast.warn(res2.data.message || "Could not update apartment.");
+            
           }
-          // console.log("Update response:", res2.data);
+         
         } catch (error) {
-          console.error("Error updating apartment:", error);
+       
           toast.error("Failed to update apartment availability.");
         }
 

@@ -29,6 +29,7 @@ const Login = () => {
         setUser(result.user);
         saveUser(result.user)
         toast.success("Logged in successfully!");
+       
         form.reset();
         setError("");
 
@@ -44,6 +45,7 @@ const Login = () => {
   const handleSignInUserWithGoogle = () => {
     signInWithGoogle().then((result) => {
       toast.success("Login successful With Google!");
+   
      
       const user = result.user;
       saveUser(user)

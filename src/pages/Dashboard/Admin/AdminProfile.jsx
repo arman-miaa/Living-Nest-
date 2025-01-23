@@ -53,7 +53,7 @@ const AdminProfile = () => {
       return res.data;
     },
   });
-  // console.log(data);
+
 
   if (loader || isLoading) return <Loading />;
 const availableValue = Math.round((data.available / 100) * data.total);
@@ -66,7 +66,7 @@ const unavailableValue = Math.round((data.unavailable / 100) * data.total);
     { name: "Total Users", value: data.totalUsers || 0 },
     { name: "Total Members", value: data.totalMembers || 0 },
   ];
-  // console.log(chartData);
+  
 
   return (
     <div className="min-h-screen p-4 bg-gray-50">
