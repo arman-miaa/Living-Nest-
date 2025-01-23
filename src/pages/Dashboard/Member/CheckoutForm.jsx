@@ -14,6 +14,8 @@ const CheckoutForm = ({
   apartmentNo,
   apartmentId,
   selectedMonth,
+  description,
+  title,
 }) => {
   const [clientSecret, setClientSecret] = useState("");
   const [transectionId, setTransactionId] = useState(transactionId || "");
@@ -89,6 +91,8 @@ const CheckoutForm = ({
         apartmentNo,
         apartmentId,
         selectedMonth,
+        description,
+        title,
       };
 
       const res = await axiosSecure.post("/payment", payment);
@@ -102,11 +106,11 @@ const CheckoutForm = ({
             `/updateApartment/${apartmentId}`
           );
           if (res2.data.success) {
-            toast.success("Apartment updated to unavailable!");
+            // toast.success("Apartment updated to unavailable!");
           } else {
-            toast.warn(res2.data.message || "Could not update apartment.");
+            // toast.warn(res2.data.message || "Could not update apartment.");
           }
-          // console.log("Update response:", res2.data); 
+          // console.log("Update response:", res2.data);
         } catch (error) {
           console.error("Error updating apartment:", error);
           toast.error("Failed to update apartment availability.");

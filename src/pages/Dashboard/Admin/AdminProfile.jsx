@@ -12,7 +12,7 @@ import Loading from "../../Loading";
 import SectionTitle from "../../../Shared/SectionTitle";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A078FF"];
+const COLORS = ["#0088FE", "#00C49F", "#ea580c", "#FF8042", "#A078FF"];
 const RADIAN = Math.PI / 180;
 
 // Custom label for PieChart
@@ -53,7 +53,7 @@ const AdminProfile = () => {
       return res.data;
     },
   });
-  console.log(data);
+  // console.log(data);
 
   if (loader || isLoading) return <Loading />;
 const availableValue = Math.round((data.available / 100) * data.total);
@@ -86,13 +86,13 @@ const unavailableValue = Math.round((data.unavailable / 100) * data.total);
         <StatCard
           icon={<FaCheckCircle className="text-3xl" />}
           title="Available"
-          value={data.available}
+          value={`${data.available}%`}
           colors="from-green-500 to-teal-600"
         />
         <StatCard
           icon={<FaTimesCircle className="text-3xl" />}
           title="Unavailable"
-          value={data.unavailable}
+          value={`${data.unavailable}%`}
           colors="from-red-500 to-orange-600"
         />
         <StatCard
@@ -125,7 +125,9 @@ const unavailableValue = Math.round((data.unavailable / 100) * data.total);
 
         {/* Chart Section */}
         <div className="bg-white p-6 rounded shadow">
-          <h3 className="text-xl font-bold mb-4">Overview Chart</h3>
+          <h3 className="text-xl font-bold mb-4 text-primary">
+            Overview Chart
+          </h3>
           <div className="h-64">
             <ResponsiveContainer>
               <PieChart>
@@ -169,7 +171,7 @@ const StatCard = ({ icon, title, value, colors }) => (
     {icon}
     <div>
       <h3 className="text-xl font-bold">{title}</h3>
-      <p className="text-2xl">{value}</p>
+      <p className="text-2xl">{value}  </p>
     </div>
   </div>
 );

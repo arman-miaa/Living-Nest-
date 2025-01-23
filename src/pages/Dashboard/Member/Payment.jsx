@@ -112,6 +112,8 @@ const Payment = () => {
             blockName={location.state.blockName}
             apartmentNo={location.state.apartmentNo}
             apartmentId={location.state.apartmentId}
+            description={location.state.description}
+            title={location.state.title}
             originalRent={location.state.rent}
           />
         </Elements>
