@@ -40,6 +40,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setLoader(true)
       setUser(currentUser);
 
       if (currentUser) {
@@ -53,7 +54,9 @@ const AuthProvider = ({ children }) => {
             }
           })
           .catch(error => {
-          console.log('ERROR on token', error);
+            console.log('ERROR on token', error);
+              setLoader(false);
+            
         })
       }
       else {
