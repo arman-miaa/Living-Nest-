@@ -19,7 +19,6 @@ const MemberProfile = () => {
     },
   });
 
-  console.log(data);
 
   if (isLoading) return <Loading />;
 
