@@ -1,73 +1,64 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
-import userImg from '../../src/assets/user-icon.jpg'
+import userImg from "../../src/assets/user-icon.jpg";
 import Button from "../Shared/Button";
-
+import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { GrLogout } from "react-icons/gr";
 
 const Navbar = () => {
+  const { user, logOutUser } = useAuth() || {}; 
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
 
-  const { user, logOutUser } = useAuth();
- 
-  
-    
-    const links = (
-      <>
-        <li className="hover:text-[#28ea72f0] hover:underline">
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li className="hover:text-[#28ea72f0] hover:underline">
-          <NavLink to="apartments">Apartments</NavLink>
-        </li>
-        <li className="hover:text-[#28ea72f0] hover:underline">
-          <NavLink to="/contact">Contact US</NavLink>
-        </li>
-      </>
-    );
-  
+  const toggleSidebar = () => {
+    setSidebarOpen((prev) => !prev);
+  };
+
   const handleLogOutUser = () => {
-    logOutUser();
-  }
+    if (logOutUser) logOutUser();
+  };
 
-    return (
-      <div className="navbar  container mx-auto">
+  const links = (
+    <>
+      <li className="hover:text-[#28ea72f0] hover:underline">
+        <NavLink to="/" onClick={toggleSidebar}>
+          Home
+        </NavLink>
+      </li>
+      <li className="hover:text-[#28ea72f0] hover:underline">
+        <NavLink to="/apartments" onClick={toggleSidebar}>
+          Apartments
+        </NavLink>
+      </li>
+      <li className="hover:text-[#28ea72f0] hover:underline">
+        <NavLink to="/contact" onClick={toggleSidebar}>
+          Contact Us
+        </NavLink>
+      </li>
+    </>
+  );
+
+  return (
+    <div className="relative">
+      {/* Navbar */}
+      <div className="navbar container mx-auto  text-white">
         <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className=" ml-1 mr-3 lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-            >
-              {links}
-            </ul>
-          </div>
+          <button className="lg:hidden p-2 text-2xl" onClick={toggleSidebar}>
+            {isSidebarOpen ? "" : <FaBars />}
+          </button>
           <div className="flex items-center gap-2">
             <img
               className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover cursor-pointer"
               src="/logo.png"
-              alt=""
+              alt="LivingNest Logo"
             />
-            <a className=" text-lg md:text-xl text-white cursor-pointer hover:text-secondary">
+            <a className="text-lg md:text-xl cursor-pointer hover:text-secondary">
               LivingNest
             </a>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu font-bold text-white text-lg  menu-horizontal px-1">
+          <ul className="menu font-bold text-white text-lg menu-horizontal px-1">
             {links}
           </ul>
         </div>
@@ -82,30 +73,32 @@ const Navbar = () => {
                 <div className="w-10 lg:w-12 rounded-full border-2 shadow-2xl">
                   <img
                     alt="User Avatar"
-                    src={user.photoURL || userImg}
+                    src={user?.photoURL || userImg}
                     onError={(e) => (e.target.src = userImg)}
                   />
                 </div>
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm flex dropdown-content justify-center  bg-base-100 rounded-box z-50 mt-3 w-36 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-36 p-2 shadow"
               >
                 <li className="text-xl font-semibold text-accent text-center mb-1">
-                  {user?.displayName}
+                  {user?.displayName || "User"}
                 </li>
                 <li>
-                  <button className="btn border-secondary hover:bg-secondary hover:text-white">
-                    {" "}
-                    <Link to="/dashboard">Dashboard</Link>
-                  </button>
+                  <Link
+                    to="/dashboard"
+                    className="btn border-secondary hover:bg-secondary hover:text-white"
+                  >
+                    Dashboard
+                  </Link>
                 </li>
                 <li>
                   <button
                     onClick={handleLogOutUser}
                     className="btn mt-2 border-secondary hover:bg-secondary hover:text-white"
                   >
-                    LogOut
+                    Log Out
                   </button>
                 </li>
               </ul>
@@ -114,16 +107,9 @@ const Navbar = () => {
         ) : (
           <div className="navbar-end">
             <div className="flex gap-2">
-              {/* <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
-                <NavLink to="/logIn">LogIn</NavLink>
-              </button> */}
               <NavLink to="/logIn">
                 <Button styleBtn="LogIn" />
               </NavLink>
-
-              {/* <button className="btn btn-primary bg-secondary text-white hover:bg-primary">
-                <NavLink to="/signUp">SignUp</NavLink>
-              </button> */}
               <NavLink to="/signUp">
                 <Button styleBtn="SignUp" />
               </NavLink>
@@ -131,7 +117,46 @@ const Navbar = () => {
           </div>
         )}
       </div>
-    );
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full lg:hidden w-60 bg-[#1f5b73] text-white z-50 transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300`}
+      >
+        <div className="p-4 flex items-center gap-2 bg-[#143847]">
+          <img
+            className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover cursor-pointer"
+            src="/logo.png"
+            alt="LivingNest Logo"
+          />
+          <div className="flex items-center gap-6">
+            <h2 className="text-lg md:text-xl font-semibold">LivingNest </h2>
+            <button
+              onClick={toggleSidebar}
+              className="bg-primary text-2xl rounded-full"
+            >
+              <FaTimes />
+            </button>
+          </div>
+        </div>
+        <ul className="menu p-4">{links}</ul>
+        {user && (
+          <div className="absolute bottom-4 w-full px-4">
+            <button
+              onClick={() => {
+                handleLogOutUser();
+                toggleSidebar();
+              }}
+              className="btn bg-[#1f5b73] text-lg hover:bg-secondary text-white w-full"
+            >
+             <GrLogout /> Log Out 
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Navbar;

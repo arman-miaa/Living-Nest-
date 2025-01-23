@@ -5,6 +5,7 @@ import Loading from "../../Loading";
 import notFoundImg from "../../../../src/assets/not-found.png";
 import SectionTitle from "../../../Shared/SectionTitle";
 import { FaRegCalendarAlt, FaHome, FaBuilding } from "react-icons/fa";
+import { MdOutlineDescription, MdOutlineSubtitles, MdTitle } from "react-icons/md";
 
 const MemberProfile = () => {
   const { user } = useAuth();
@@ -17,6 +18,8 @@ const MemberProfile = () => {
       return res.data;
     },
   });
+
+  console.log(data);
 
   if (isLoading) return <Loading />;
 
@@ -40,7 +43,9 @@ const MemberProfile = () => {
         {/* Cover Image and Profile */}
         <div className="relative mb-16">
           <div className="h-40 bg-gradient-to-r from-primary to-[#1f5b73] rounded-t-lg">
-            <h1 className="text-center text-2xl md:text-3xl text-secondary pt-8">Welcome to Your Profile</h1>
+            <h1 className="text-center text-2xl md:text-3xl text-secondary pt-8">
+              Welcome to Your Profile
+            </h1>
           </div>
           <img
             src={user.photoURL || notFoundImg}
@@ -61,7 +66,17 @@ const MemberProfile = () => {
           <h3 className="text-xl font-semibold text-gray-700 mb-4 text-center">
             Agreement Details
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="flex items-center">
+            {/* <MdOutlineSubtitles className="text-primary mr-2" /> */}
+            <span className="text-xl font-semibold text-primary md:text-2xl">
+              {data.title || "Not Available"}
+            </span>
+          </div>
+          <div className="flex items-start mt-1">
+            {/* <MdOutlineDescription className="text-primary mr-2 mt-1" /> */}
+            <span>{data.description || "Not Available"}</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
             <div className="flex items-center">
               <FaRegCalendarAlt className="text-primary mr-2" />
               <span>

@@ -43,12 +43,13 @@ const Apartments = () => {
     },
   });
 
+  // console.log(data);
   if (loading || isLoading) {
     return <Loading />;
   }
 
   if (error) {
-    return <div>Error loading apartments</div>;
+    return <h3 className="text-center mt-8 text-red-600 text-2xl">Error loading apartments</h3>;
   }
 
   const handleAgreement = (apartment) => {
@@ -62,6 +63,8 @@ const Apartments = () => {
         apartmentNo: apartment.apartmentNo,
         apartmentId: apartment._id,
         rent: apartment.rent,
+        title: apartment.title,
+        description: apartment.description,
         status: "pending",
       };
 

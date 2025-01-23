@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import useAxiosSecure from "./useAxiosSecure";
 import Loading from "../pages/Loading";
+import { data } from "react-router-dom";
 
 
 const useRole = () => {
@@ -22,6 +23,7 @@ const useRole = () => {
       return data.role;
     },
   });
+ 
 
   if (!isLoading) {
     <Loading/>
