@@ -9,6 +9,7 @@ import { GrLogout } from "react-icons/gr";
 import { FaBars, FaTimes, FaHome } from "react-icons/fa"; 
 import logo from "/logo.png";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const Sidebar = () => {
   const [role, isLoading] = useRole();
@@ -21,6 +22,12 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
+
+    const handleLogOutUser = () => {
+      if (logOutUser) logOutUser(); 
+      toast.success('logged out successfully')
+     
+    };
 
   return (
     <div>
@@ -62,7 +69,7 @@ const Sidebar = () => {
 
         <div>
           <button
-            onClick={logOutUser}
+            onClick={handleLogOutUser}
             className="btn bg-[#1f5b73] hover:bg-secondary rounded-none flex justify-start pl-6 text-white border-none w-full absolute shadow-sm bottom-0 mb-4"
           >
             <GrLogout className="text-xl" /> LogOut

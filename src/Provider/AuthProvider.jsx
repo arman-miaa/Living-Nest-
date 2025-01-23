@@ -78,6 +78,23 @@ const AuthProvider = ({ children }) => {
     
   }
 
+  // const logOutUser = () => {
+  //   setLoader(true);
+  //   return signOut(auth)
+  //     .then(() => {
+  //       toast.success("Logged out successfully");
+  //     })
+  //     .catch((error) => {
+  //       toast.error(`Logout failed: ${error.message}`);
+  //     })
+  //     .finally(() => {
+  //       setLoader(false);
+  //     });
+  // };
+
+
+
+
   const authInfo = {
     user,
     setUser,

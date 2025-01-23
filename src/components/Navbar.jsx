@@ -5,6 +5,7 @@ import Button from "../Shared/Button";
 import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { GrLogout } from "react-icons/gr";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { user, logOutUser } = useAuth() || {}; 
@@ -15,7 +16,9 @@ const Navbar = () => {
   };
 
   const handleLogOutUser = () => {
-    if (logOutUser) logOutUser();
+    if (logOutUser) logOutUser(); 
+    toast.success('logged out successfully')
+   
   };
 
   const links = (
