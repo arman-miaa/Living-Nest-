@@ -2,21 +2,24 @@
 
 LivingNest is an online platform for renting apartments, managing rental agreements, and viewing available listings. It provides a user-friendly interface for apartment seekers while offering comprehensive tools for administrators to manage listings and agreements.
 
-## 🌐 Live URL
 
-- **LivingNest Website:** [https://livingnest.netlify.app](https://livingnest.netlify.app)
-
----
-
-## 👤 Admin Credentials  
-- *Email*: admin36@gmail.com  
-- *Password*: Admin36
 
 ## 🚀 Purpose
 
 The purpose of this project is to provide an intuitive and secure platform for apartment seekers to find rental properties, sign agreements, and communicate with landlords or admins. The platform is also designed for admins to efficiently manage and update apartment listings and agreements.
 
 ---
+
+## 🌐 Live URL
+
+- **LivingNest Website:** [https://livingnest.netlify.app](https://livingnest.netlify.app)
+- **LivingNest Website Firebase:** [https://livingnest-d3e5f.web.app](https://livingnest-d3e5f.web.app)
+
+---
+
+## 👤 Admin Credentials  
+- *Email*: admin36@gmail.com  
+- *Password*: Admin36
 
 ## 🌐 Server Repository
 
