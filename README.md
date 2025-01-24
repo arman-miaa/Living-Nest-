@@ -24,9 +24,10 @@ The purpose of this project is to provide an intuitive and secure platform for a
 
 ---
 
-## 🌐 Server Repository
+## 🌐 Repositories
 
-- 🖥️ **Server Repository:** [GitHub Link](https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-arman-miaa)
+- 🖥️ **Server Repository:** [GitHub Link](https://github.com/arman-miaa/Living-Nest-Server.git)  
+- 🖥️ **Client Repository:** [GitHub Link](https://github.com/arman-miaa/Living-Nest-)
 
 ---
 
@@ -48,7 +49,6 @@ The purpose of this project is to provide an intuitive and secure platform for a
 ## 📦 NPM Packages Used
 
 ### Core Dependencies:
-
 - **React**: Library for building user interfaces.
 - **React-DOM**: React rendering library.
 - **React-Router-Dom**: Enables dynamic routing.
@@ -64,7 +64,6 @@ The purpose of this project is to provide an intuitive and secure platform for a
 - **Recharts**: For displaying data visualizations like charts.
 
 ### Development Dependencies:
-
 - **TailwindCSS**: Utility-first CSS framework.
 - **DaisyUI**: TailwindCSS components for UI design.
 - **Vite**: Fast build tool and dev server.
@@ -84,3 +83,76 @@ The purpose of this project is to provide an intuitive and secure platform for a
    ```bash
    git clone https://github.com/Programming-Hero-Web-Course4/b10a12-client-side-arman-miaa
    cd b10a12-client-side-arman-miaa
+
+
+
+## 📄 API Documentation
+
+### Authentication
+
+- **POST /auth/register**: Register a new user.  
+  - Request Body:
+    ```json
+    {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "securepassword"
+    }
+    ```
+  - Response:
+    ```json
+    {
+      "message": "User registered successfully",
+      "token": "jwt-token"
+    }
+    ```
+
+- **POST /auth/login**: Login a user.  
+  - Request Body:
+    ```json
+    {
+      "email": "john@example.com",
+      "password": "securepassword"
+    }
+    ```
+  - Response:
+    ```json
+    {
+      "message": "Login successful",
+      "token": "jwt-token"
+    }
+    ```
+
+### Members Management
+
+- **GET /members**: Retrieve all members (Admin only).  
+- **PATCH /members/:id**: Update a member's status (Admin only).  
+
+### Payment Management
+
+- **POST /payments**: Create a new payment record.  
+- **GET /payments**: Retrieve payment history for a user.
+
+### Coupons Management
+
+- **GET /coupons**: Retrieve all coupons.  
+- **POST /coupons**: Add a new coupon (Admin only).  
+- **PATCH /coupons/:id**: Update coupon availability (Admin only).
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request with your changes.
+
+---
+
+
+
+---
+
+## 📞 Contact
+
+For any inquiries, please reach out to:
+
+- **Email**: arman.miaa36@gmail.com
