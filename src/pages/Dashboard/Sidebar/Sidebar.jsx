@@ -10,11 +10,13 @@ import { FaBars, FaTimes, FaHome } from "react-icons/fa";
 import logo from "/logo.png";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const Sidebar = () => {
   const [role, isLoading] = useRole();
   const { logOutUser } = useAuth();
   const [isSidebarOpen, setSidebarOpen] = useState(false); 
+  const { darkMode } = useTheme();
 
   if (isLoading) return <Loading />;
 
@@ -41,11 +43,15 @@ const Sidebar = () => {
 
       {/* Sidebar */}
       <div
-        className={`bg-primary ${
-          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={` ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} ${
+          darkMode ? "bg-[#272c31]" : "bg-primary"
         } md:translate-x-0 transform transition-transform duration-300 flex flex-col fixed bottom-0 left-0 top-0 w-60 min-h-screen z-50`}
       >
-        <div className="flex items-center bg-[#1f5b73] shadow-xl gap-2 p-2">
+        <div
+          className={`flex items-center  ${
+            darkMode ? "bg-[#30363c]" : "bg-[#1f5b73]"
+          } shadow-xl gap-2 p-2`}
+        >
           <img
             className="w-10 h-10 rounded-full cursor-pointer"
             src={logo}
@@ -62,7 +68,9 @@ const Sidebar = () => {
 
         <Link
           to="/"
-          className="btn bg-[#1f5b73] mt-4 rounded-none hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden"
+          className={`btn ${
+            darkMode ? "bg-[#30363c]" : "bg-[#1f5b73]"
+          } mt-4 rounded-none hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden`}
         >
           <FaHome className="text-xl" /> Home
         </Link>
@@ -70,7 +78,9 @@ const Sidebar = () => {
         <div>
           <button
             onClick={handleLogOutUser}
-            className="btn bg-[#1f5b73] hover:bg-secondary rounded-none flex justify-start pl-6 text-white border-none w-full absolute shadow-sm bottom-0 mb-4"
+            className={`btn ${
+              darkMode ? "bg-[#30363c]" : "bg-[#1f5b73]"
+            } hover:bg-secondary rounded-none flex justify-start pl-6 text-white border-none w-full absolute shadow-sm bottom-0 mb-4`}
           >
             <GrLogout className="text-xl" /> LogOut
           </button>

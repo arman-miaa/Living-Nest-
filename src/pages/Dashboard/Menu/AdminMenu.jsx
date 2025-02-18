@@ -5,9 +5,11 @@ import { SiManageiq } from "react-icons/si";
 import { NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import notFoundImg from '../../../../src/assets/user-icon.jpg'
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const AdminMenu = ({onclose}) => {
   const { user } = useAuth();
+  const { darkMode } = useTheme();
     return (
       <div>
         {/* Profile Section */}
@@ -28,9 +30,8 @@ const AdminMenu = ({onclose}) => {
             onClick={onclose}
             to="/dashboard/adminProfile"
             className={({ isActive }) =>
-              `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
-                isActive ? "bg-secondary" : ""
-              }`
+              `btn rounded-none mt-4 flex justify-start pl-6 text-white border-none w-full overflow-hidden
+    ${isActive ? "bg-secondary" : darkMode ? "bg-[#30363c]" : "bg-[#1f5b73]"}`
             }
           >
             <CgProfile className="text-xl" /> Admin Profile
@@ -41,7 +42,11 @@ const AdminMenu = ({onclose}) => {
             to="/dashboard/manageMember"
             className={({ isActive }) =>
               `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
-                isActive ? "bg-secondary" : ""
+                isActive
+                  ? "bg-secondary"
+                  : darkMode
+                  ? "bg-[#30363c]"
+                  : "bg-[#1f5b73]"
               }`
             }
           >
@@ -52,7 +57,11 @@ const AdminMenu = ({onclose}) => {
             to="/dashboard/makeAnnouncement"
             className={({ isActive }) =>
               `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
-                isActive ? "bg-secondary" : ""
+                isActive
+                  ? "bg-secondary"
+                  : darkMode
+                  ? "bg-[#30363c]"
+                  : "bg-[#1f5b73]"
               }`
             }
           >
@@ -63,7 +72,11 @@ const AdminMenu = ({onclose}) => {
             to="/dashboard/agreementRequests"
             className={({ isActive }) =>
               `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
-                isActive ? "bg-secondary" : ""
+                isActive
+                  ? "bg-secondary"
+                  : darkMode
+                  ? "bg-[#30363c]"
+                  : "bg-[#1f5b73]"
               }`
             }
           >
@@ -74,7 +87,11 @@ const AdminMenu = ({onclose}) => {
             to="/dashboard/manageCoupons"
             className={({ isActive }) =>
               `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
-                isActive ? "bg-secondary" : ""
+                isActive
+                  ? "bg-secondary"
+                  : darkMode
+                  ? "bg-[#30363c]"
+                  : "bg-[#1f5b73]"
               }`
             }
           >
