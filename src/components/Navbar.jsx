@@ -71,7 +71,7 @@ const Navbar = () => {
         {/* Theme Toggle Button */}
         <button
           onClick={toggleTheme}
-          className=" px-2 capitalize flex justify-center items-center gap-0 md:gap-2"
+          className={` ${user ? 'ml-10' : ''} ml-6 px-2 capitalize flex justify-center items-center gap-0 md:gap-2`}
           aria-label="Toggle Theme"
         >
           {darkMode ? (

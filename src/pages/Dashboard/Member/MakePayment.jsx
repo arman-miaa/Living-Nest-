@@ -213,11 +213,12 @@ const MakePayment = () => {
         <div className="form-control mt-6">
           <button
             type="submit"
-            className={`btn bg-secondary  text-white hover:bg-orange-700`}
-            disabled={hasPaid}
+            className={`btn    ${
+              hasPaid ? "bg-gray-400 cursor-not-allowed hover:bg-gray-400" : "bg-secondary hover:bg-orange-700 text-white "
+            } `}
+            // disabled={hasPaid}
           >
             {hasPaid ? "Payment Completed" : "Pay Now"}
-           
           </button>
         </div>
       </form>
