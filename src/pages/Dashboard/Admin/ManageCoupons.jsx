@@ -8,10 +8,12 @@ import { toast } from "react-toastify";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import Button from "../../../Shared/Button";
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const ManageCoupons = () => {
   const axiosSecure = useAxiosSecure();
   const [showModal, setShowModal] = useState(false);
+  const { darkMode } = useTheme();
   const [formData, setFormData] = useState({
     code: "",
     percentage: "",
@@ -71,7 +73,11 @@ const ManageCoupons = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="min-h-screen p-4 md:p-6 bg-gray-50">
+    <div
+      className={`min-h-screen p-4 md:p-6 ${
+        darkMode ? "bg-dark" : "bg-gray-50"
+      }`}
+    >
       {/* Header with Add Button */}
       <SectionTitle
         heading="Manage Coupons"
@@ -104,9 +110,15 @@ const ManageCoupons = () => {
           {data.map((coupon, index) => (
             <tr
               key={coupon._id}
-              className="hover:bg-gray-50 transition duration-300 ease-in-out"
+              className={`${
+                darkMode ? "hover:bg-[#30363c]" : "hover:bg-gray-50"
+              } transition duration-300 ease-in-out`}
             >
-              <td className="hidden lg:flex text-xs lg:text-base px-1 lg:px-4">
+              <td
+                className={`hidden lg:flex text-xs lg:text-base px-1 lg:px-4 ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
                 {index + 1}
               </td>
               {/* <td className="hidden lg:flex text-xs lg:text-base px-1 lg:px-4">
@@ -117,10 +129,18 @@ const ManageCoupons = () => {
                   alt="Coupon"
                 />
               </td> */}
-              <td className="text-xs lg:text-base px-1 lg:px-4">
+              <td
+                className={`text-xs lg:text-base px-1 lg:px-4 ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
                 {coupon.code}
               </td>
-              <td className="text-xs lg:text-base px-1 lg:px-4">
+              <td
+                className={`text-xs lg:text-base px-1 lg:px-4 ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
                 {coupon.percentage}%
               </td>
               <td className="px-1 lg:px-4">
@@ -156,7 +176,9 @@ const ManageCoupons = () => {
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded shadow-lg md:w-96">
-            <h3 className="text-lg font-semibold mb-4 text-accent">Add New Coupon</h3>
+            <h3 className="text-lg font-semibold mb-4 text-accent">
+              Add New Coupon
+            </h3>
             <form onSubmit={handleFormSubmit}>
               <div className="mb-4">
                 <label className="block text-sm font-medium">Coupon Code</label>
@@ -213,7 +235,7 @@ const ManageCoupons = () => {
                 {/* <button type="submit" className="btn btn-primary">
                   Submit
                 </button> */}
-                <Button styleBtn={`Submit`}/>
+                <Button styleBtn={`Submit`} />
               </div>
             </form>
           </div>

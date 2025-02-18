@@ -80,29 +80,51 @@ const AgreementRequest = () => {
           return (
             <div
               key={apartment._id}
-              className="card bg-white shadow-md rounded-lg overflow-hidden"
+              className={`card ${
+                darkMode ? "bg-[#272c31]" : "bg-white"
+              } shadow-md rounded-lg overflow-hidden`}
             >
               <div className="card-body p-4">
                 <h2 className="font-bold text-lg text-primary flex items-center gap-2">
                   <FiUser className="text-primary" /> {apartment.userName}
                 </h2>
-                <p className="text-sm text-gray-600 flex items-center gap-2">
+                <p
+                  className={`text-sm ${
+                    darkMode ? "text-gray-50" : "text-gray-600"
+                  } flex items-center gap-2`}
+                >
                   <FiUser className="text-secondary" /> {apartment.userEmail}
                 </p>
                 <hr className="my-2" />
-                <p className="flex items-center gap-2">
+                <p
+                  className={`flex items-center gap-2 ${
+                    darkMode ? "text-gray-50" : ""
+                  }`}
+                >
                   <MdApartment className="text-primary" /> Floor No:{" "}
                   <strong>{apartment.floorNo}</strong>
                 </p>
-                <p className="flex items-center gap-2">
+                <p
+                  className={`flex items-center gap-2 ${
+                    darkMode ? "text-gray-50" : ""
+                  }`}
+                >
                   <MdApartment className="text-accent" /> Block Name:{" "}
                   <strong>{apartment.blockName}</strong>
                 </p>
-                <p className="flex items-center gap-2">
+                <p
+                  className={`flex items-center gap-2 ${
+                    darkMode ? "text-gray-50" : ""
+                  }`}
+                >
                   <MdApartment className="text-secondary" /> Apartment No:{" "}
                   <strong>{apartment.apartmentNo}</strong>
                 </p>
-                <p className="flex items-center gap-2">
+                <p
+                  className={`flex items-center gap-2 ${
+                    darkMode ? "text-gray-50" : ""
+                  }`}
+                >
                   <FaCheckCircle className="text-green-500" /> Rent:{" "}
                   <strong>${apartment.rent}</strong>
                 </p>
