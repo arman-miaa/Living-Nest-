@@ -14,6 +14,7 @@ const ManageCoupons = () => {
   const axiosSecure = useAxiosSecure();
   const [showModal, setShowModal] = useState(false);
   const { darkMode } = useTheme();
+  
   const [formData, setFormData] = useState({
     code: "",
     percentage: "",

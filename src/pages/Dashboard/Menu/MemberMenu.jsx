@@ -4,9 +4,11 @@ import { MdAnnouncement, MdOutlinePayment } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import notFoundImg from '../../../../src/assets/user-icon.jpg'
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const MemberMenu = ({onclose}) => {
   const { user } = useAuth();
+  const { darkMode } = useTheme();
 
   return (
     <div>
@@ -30,8 +32,12 @@ const MemberMenu = ({onclose}) => {
           onClick={onclose}
           to="/dashboard/memberProfile"
           className={({ isActive }) =>
-            `btn bg-[#1f5b73] rounded-none mt-2 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
-              isActive ? "bg-secondary" : ""
+            `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
+              isActive
+                ? "bg-secondary"
+                : darkMode
+                ? "bg-[#30363c]"
+                : "bg-[#1f5b73]"
             }`
           }
         >
@@ -42,7 +48,11 @@ const MemberMenu = ({onclose}) => {
           to="/dashboard/makePayment"
           className={({ isActive }) =>
             `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
-              isActive ? "bg-secondary" : ""
+              isActive
+                ? "bg-secondary"
+                : darkMode
+                ? "bg-[#30363c]"
+                : "bg-[#1f5b73]"
             }`
           }
         >
@@ -53,7 +63,11 @@ const MemberMenu = ({onclose}) => {
           to="/dashboard/paymentHistory"
           className={({ isActive }) =>
             `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
-              isActive ? "bg-secondary" : ""
+              isActive
+                ? "bg-secondary"
+                : darkMode
+                ? "bg-[#30363c]"
+                : "bg-[#1f5b73]"
             }`
           }
         >
@@ -64,7 +78,11 @@ const MemberMenu = ({onclose}) => {
           to="/dashboard/memberAnnouncement"
           className={({ isActive }) =>
             `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
-              isActive ? "bg-secondary" : ""
+              isActive
+                ? "bg-secondary"
+                : darkMode
+                ? "bg-[#30363c]"
+                : "bg-[#1f5b73]"
             }`
           }
         >

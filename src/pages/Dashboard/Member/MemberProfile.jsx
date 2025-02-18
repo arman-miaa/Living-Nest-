@@ -6,10 +6,12 @@ import notFoundImg from "../../../../src/assets/not-found.png";
 import SectionTitle from "../../../Shared/SectionTitle";
 import { FaRegCalendarAlt, FaHome, FaBuilding } from "react-icons/fa";
 import { MdOutlineDescription, MdOutlineSubtitles, MdTitle } from "react-icons/md";
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const MemberProfile = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const { darkMode } = useTheme();
 
   const { data = {}, isLoading } = useQuery({
     queryKey: ["agreement", user.email],
@@ -32,13 +34,21 @@ const MemberProfile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8 md:p-16 ">
+    <div
+      className={`min-h-screen p-8 md:p-16 ${
+        darkMode ? "bg-dark" : "bg-gray-100 "
+      }`}
+    >
       {/* <SectionTitle
         heading="Welcome to Your Profile"
         subHeading="Manage your details and agreements with ease."
       /> */}
 
-      <div className="bg-white mx-auto  p-8 rounded-xl shadow-xl max-w-3xl relative">
+      <div
+        className={`${
+          darkMode ? "bg-[#30363c]" : "bg-white"
+        } mx-auto p-8 rounded-xl mt-20 shadow-xl max-w-3xl relative`}
+      >
         {/* Cover Image and Profile */}
         <div className="relative mb-16">
           <div className="h-40 bg-gradient-to-r from-primary to-[#1f5b73] rounded-t-lg">
@@ -57,12 +67,18 @@ const MemberProfile = () => {
         {/* User Info */}
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold text-accent">{user.displayName}</h2>
-          <p className="text-gray-500">{user.email}</p>
+          <p className={`${darkMode ? "text-gray-50" : "text-gray-500"}`}>
+            {user.email}
+          </p>
         </div>
 
         {/* Agreement Info */}
         <div className="border-t pt-6">
-          <h3 className="text-xl font-semibold text-gray-700 mb-4 text-center">
+          <h3
+            className={`text-xl font-semibold text-gray-700 mb-4 text-center ${
+              darkMode ? "text-secondary" : ""
+            }`}
+          >
             Agreement Details
           </h3>
           <div className="flex items-center">
@@ -73,31 +89,33 @@ const MemberProfile = () => {
           </div>
           <div className="flex items-start mt-1">
             {/* <MdOutlineDescription className="text-primary mr-2 mt-1" /> */}
-            <span>{data.description || "Not Available"}</span>
+            <span className={`${darkMode ? "text-gray-300" : ""}`}>
+              {data.description || "Not Available"}
+            </span>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
             <div className="flex items-center">
               <FaRegCalendarAlt className="text-primary mr-2" />
-              <span>
+              <span className={`${darkMode ? "text-gray-300" : ""}`}>
                 <strong>Agreement Date:</strong> {formatDate(data.date)}
               </span>
             </div>
             <div className="flex items-center">
               <FaHome className="text-primary mr-2" />
-              <span>
+              <span className={`${darkMode ? "text-gray-300" : ""}`}>
                 <strong>Apartment No:</strong>{" "}
                 {data.apartmentNo || "Not Available"}
               </span>
             </div>
             <div className="flex items-center">
               <FaBuilding className="text-primary mr-2" />
-              <span>
+              <span className={`${darkMode ? "text-gray-300" : ""}`}>
                 <strong>Block:</strong> {data.blockName || "Not Available"}
               </span>
             </div>
             <div className="flex items-center">
               <FaHome className="text-primary mr-2" />
-              <span>
+              <span className={`${darkMode ? "text-gray-300" : ""}`}>
                 <strong>Floor No:</strong> {data.floorNo || "Not Available"}
               </span>
             </div>

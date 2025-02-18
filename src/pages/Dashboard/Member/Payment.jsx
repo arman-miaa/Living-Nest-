@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import SectionTitle from "../../../Shared/SectionTitle";
 import Button from "../../../Shared/Button";
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const Payment = () => {
   const axiosSecure = useAxiosSecure();
@@ -16,6 +17,7 @@ const Payment = () => {
   const [coupon, setCoupon] = useState("");
   const [discount, setDiscount] = useState(0);
   const [finalAmount, setFinalAmount] = useState(location.state?.rent || 0);
+  const { darkMode } = useTheme();
 
   if (
     !location.state ||
@@ -65,7 +67,11 @@ const Payment = () => {
         {/* Coupon Section */}
         <div className="flex flex-col md:flex-row  items-center gap-4">
           <div className="w-full md:w-1/2">
-            <label className="block font-semibold text-lg text-gray-700">
+            <label
+              className={`block font-semibold text-lg ${
+                darkMode ? "text-gray-300" : "text-gray-700"
+              }`}
+            >
               Apply Coupon
             </label>
             <input
@@ -86,7 +92,11 @@ const Payment = () => {
 
         {/* Rent Details */}
         <div>
-          <h2 className="text-xl font-semibold">
+          <h2
+            className={`text-xl font-semibold ${
+              darkMode ? "text-gray-300" : "text-gray-700"
+            }`}
+          >
             Original Rent: ${location.state.rent.toFixed(2)}
           </h2>
           {discount > 0 && (
@@ -100,7 +110,11 @@ const Payment = () => {
 
       {/* Payment Section */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold">
+        <h2
+          className={`text-xl font-semibold ${
+            darkMode ? "text-gray-300" : "text-gray-700"
+          }`}
+        >
           Please make your payment using your card:
         </h2>
         <Elements stripe={stripePromise}>

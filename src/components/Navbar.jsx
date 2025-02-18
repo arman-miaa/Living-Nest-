@@ -138,11 +138,17 @@ const Navbar = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full lg:hidden w-60 bg-[#1f5b73] text-white z-50 transform ${
+        className={`fixed top-0 left-0 h-full lg:hidden w-60 ${
+          darkMode ? "bg-dark" : "bg-primary"
+        } text-white z-50 transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300`}
       >
-        <div className="p-4 flex items-center gap-2 bg-[#143847]">
+        <div
+          className={`p-4 flex items-center gap-2 ${
+            darkMode ? "bg-[#30363c]" : "bg-[#143847]"
+          }`}
+        >
           <img
             className="w-10 h-10 md:w-12 md:h-12 rounded-full object-cover cursor-pointer"
             src="/logo.png"
@@ -166,7 +172,9 @@ const Navbar = () => {
                 handleLogOutUser();
                 toggleSidebar();
               }}
-              className="btn bg-[#1f5b73] text-lg hover:bg-secondary text-white w-full"
+              className={`btn bg-[#1f5b73]  ${
+                darkMode ? "bg-[#30363c]" : "bg-[#1f5b73]"
+              } text-lg hover:bg-secondary text-white w-full`}
             >
               <GrLogout /> Log Out
             </button>

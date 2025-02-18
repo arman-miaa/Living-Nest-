@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useAuth from "../../../Hooks/useAuth";
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const CheckoutForm = ({
   amount,
@@ -25,6 +26,7 @@ const CheckoutForm = ({
   const { user } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const { darkMode } = useTheme();
 
   useEffect(() => {
     if (amount > 0) {
@@ -130,6 +132,7 @@ const CheckoutForm = ({
             style: {
               base: {
                 fontSize: "16px",
+                iconColor: darkMode ? "#FFD700" : "",
                 color: "#424770",
                 "::placeholder": {
                   color: "#aab7c4",

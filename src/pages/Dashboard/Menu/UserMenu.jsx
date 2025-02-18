@@ -3,9 +3,11 @@ import { NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import notFoundImg from '../../../../src/assets/user-icon.jpg';
 import { MdAnnouncement } from "react-icons/md";
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const UserMenu = ({onclose}) => {
   const { user } = useAuth();
+  const { darkMode } = useTheme();
     return (
       <div>
         {/* Profile Section */}
@@ -33,7 +35,11 @@ const UserMenu = ({onclose}) => {
             to="/dashboard/userProfile"
             className={({ isActive }) =>
               `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
-                isActive ? "bg-secondary" : ""
+                isActive
+                  ? "bg-secondary"
+                  : darkMode
+                  ? "bg-[#30363c]"
+                  : "bg-[#1f5b73]"
               }`
             }
           >
@@ -44,7 +50,11 @@ const UserMenu = ({onclose}) => {
             to="/dashboard/userAnouncements"
             className={({ isActive }) =>
               `btn bg-[#1f5b73] rounded-none mt-4 hover:bg-secondary flex justify-start pl-6 text-white border-none w-full overflow-hidden ${
-                isActive ? "bg-secondary" : ""
+                isActive
+                  ? "bg-secondary"
+                  : darkMode
+                  ? "bg-[#30363c]"
+                  : "bg-[#1f5b73]"
               }`
             }
           >

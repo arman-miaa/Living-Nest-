@@ -3,10 +3,12 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useAuth from "../../../Hooks/useAuth";
 import Loading from "../../Loading";
 import SectionTitle from "../../../Shared/SectionTitle";
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const PaymentHistory = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const { darkMode } = useTheme();
 
   const { data = {}, isLoading } = useQuery({
     queryKey: ["payment"],
@@ -27,7 +29,9 @@ const PaymentHistory = () => {
         subHeading="View details of your recent payments and apartments"
       />
       <div className="overflow-x-auto shadow-md rounded-lg border -mt-8 border-gray-200">
-        <table className="min-w-full bg-white text-sm">
+        <table
+          className={`min-w-full  text-sm  ${darkMode ? "bg-[#30363c]" : ""}`}
+        >
           <thead className="bg-primary">
             <tr>
               <th className="px-6 py-3 text-left text-white font-semibold">
@@ -39,47 +43,145 @@ const PaymentHistory = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="hover:bg-gray-400 cursor-pointer">
-              <td className="px-6 py-4 border-t font-medium">Email</td>
-              <td className="px-6 py-4 border-t break-words">
+            <tr
+              className={` ${
+                darkMode ? "hover:bg-[#3f474f]" : "hover:bg-gray-50"
+              } cursor-pointer`}
+            >
+              <td
+                className={`px-6 py-4 border-t font-medium ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
+                Email
+              </td>
+
+              {/* <td className="px-6 py-4 border-t break-words"> */}
+              <td
+                className={`px-6 py-4 border-t break-words ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
                 {email || "Not Available"}
               </td>
             </tr>
-            <tr className="hover:bg-gray-400 cursor-pointer">
-              <td className="px-6 py-4 border-t font-medium">Price</td>
-              <td className="px-6 py-4 border-t">
+            <tr
+              className={` ${
+                darkMode ? "hover:bg-[#3f474f]" : "hover:bg-gray-50"
+              } cursor-pointer`}
+            >
+              <td
+                className={`px-6 py-4 border-t font-medium ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
+                Price
+              </td>
+              <td
+                className={`px-6 py-4 border-t ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
                 ${price || "Not Available"}
               </td>
             </tr>
-            <tr className="hover:bg-gray-400 cursor-pointer">
-              <td className="px-6 py-4 border-t font-medium">Floor Number</td>
-              <td className="px-6 py-4 border-t">
+            <tr
+              className={` ${
+                darkMode ? "hover:bg-[#3f474f]" : "hover:bg-gray-50"
+              } cursor-pointer`}
+            >
+              <td
+                className={`px-6 py-4 border-t font-medium ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
+                Floor Number
+              </td>
+              <td
+                className={`px-6 py-4 border-t ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
                 {floorNo || "Not Available"}
               </td>
             </tr>
-            <tr className="hover:bg-gray-400 cursor-pointer">
-              <td className="px-6 py-4 border-t font-medium">Block Name</td>
-              <td className="px-6 py-4 border-t">
+            <tr
+              className={` ${
+                darkMode ? "hover:bg-[#3f474f]" : "hover:bg-gray-50"
+              } cursor-pointer`}
+            >
+              <td
+                className={`px-6 py-4 border-t font-medium ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
+                Block Name
+              </td>
+              <td
+                className={`px-6 py-4 border-t ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
                 {blockName || "Not Available"}
               </td>
             </tr>
-            <tr className="hover:bg-gray-400 cursor-pointer">
-              <td className="px-6 py-4 border-t font-medium">
+            <tr
+              className={` ${
+                darkMode ? "hover:bg-[#3f474f]" : "hover:bg-gray-50"
+              } cursor-pointer`}
+            >
+              <td
+                className={`px-6 py-4 border-t font-medium ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
                 Apartment Number
               </td>
-              <td className="px-6 py-4 border-t">
+              <td
+                className={`px-6 py-4 border-t ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
                 {apartmentNo || "Not Available"}
               </td>
             </tr>
-            <tr className="hover:bg-gray-400 cursor-pointer">
-              <td className="px-6 py-4 border-t font-medium">Mounth</td>
-              <td className="px-6 py-4 border-t">
+            <tr
+              className={` ${
+                darkMode ? "hover:bg-[#3f474f]" : "hover:bg-gray-50"
+              } cursor-pointer`}
+            >
+              <td
+                className={`px-6 py-4 border-t font-medium ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
+                Mounth
+              </td>
+              <td
+                className={`px-6 py-4 border-t ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
                 {selectedMonth || "Not Available"}
               </td>
             </tr>
-            <tr className="hover:bg-gray-400 cursor-pointer">
-              <td className="px-6 py-4 border-t font-medium">Transaction ID</td>
-              <td className="px-6 py-4 border-t break-words">
+            <tr
+              className={` ${
+                darkMode ? "hover:bg-[#3f474f]" : "hover:bg-gray-50"
+              } cursor-pointer`}
+            >
+              <td
+                className={`px-6 py-4 border-t font-medium ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
+                Transaction ID
+              </td>
+              <td
+                className={`px-6 py-4 border-t break-words ${
+                  darkMode ? "text-gray-50" : ""
+                }`}
+              >
                 {transactionId || "Not Available"}
               </td>
             </tr>

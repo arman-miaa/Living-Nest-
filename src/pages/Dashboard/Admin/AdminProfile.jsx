@@ -125,8 +125,20 @@ const unavailableValue = Math.round((data.unavailable / 100) * data.total);
             alt="Admin"
             className="w-28 h-28 rounded-full border-4 border-white object-cover -mt-14 mx-auto"
           />
-          <h2 className={`text-2xl font-bold mt-4 ${darkMode ? 'text-primary': ''}`}>{user.displayName}</h2>
-          <p className="text-lg text-gray-500">{user.email}</p>
+          <h2
+            className={`text-2xl font-bold mt-4 ${
+              darkMode ? "text-primary" : ""
+            }`}
+          >
+            {user.displayName}
+          </h2>
+          <p
+            className={`text-lg ${
+              darkMode ? "text-gray-300" : "text-gray-500"
+            }`}
+          >
+            {user.email}
+          </p>
         </div>
 
         {/* Chart Section */}

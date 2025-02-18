@@ -6,12 +6,15 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import SectionTitle from "../../../Shared/SectionTitle";
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const MakePayment = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [hasPaid, setHasPaid] = useState(false);
+    const { darkMode } = useTheme();
+  
 
   // Fetch agreement data
   const { data = {}, isLoading: agreementLoading } = useQuery({
@@ -75,67 +78,122 @@ const MakePayment = () => {
         subHeading="Securely settle your dues and manage your rental payments with ease"
       />
 
-      <form className="card-body w-full mx-4 md:w-1/2 md:mx-auto" onSubmit={handlePayment}>
+      <form
+        className="card-body w-full mx-4 md:w-1/2 md:mx-auto"
+        onSubmit={handlePayment}
+      >
         <div className="form-control -mt-20">
           <label className="label">
-            <span className="label-text font-semibold">Email</span>
+            <span
+              className={`label-text font-semibold ${
+                darkMode ? "text-gray-300" : ""
+              }`}
+            >
+              Email
+            </span>
           </label>
           <input
             type="email"
             defaultValue={user.email}
-            className="input input-bordered"
+            className={` input input-bordered ${
+              darkMode ? "bg-[#272c31] text-gray-300" : ""
+            }`}
             readOnly
           />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text font-semibold">Floor</span>
+            <span
+              className={`label-text font-semibold ${
+                darkMode ? "text-gray-300" : ""
+              }`}
+            >
+              Floor
+            </span>
           </label>
           <input
             type="text"
             defaultValue={data.floorNo || "None"}
-            className="input input-bordered"
+            className={` input input-bordered ${
+              darkMode ? "bg-[#272c31] text-gray-300" : ""
+            }`}
             readOnly
           />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text font-semibold">Block</span>
+            <span
+              className={`label-text font-semibold ${
+                darkMode ? "text-gray-300" : ""
+              }`}
+            >
+              Block
+            </span>
           </label>
           <input
             type="text"
             defaultValue={data.blockName || "None"}
-            className="input input-bordered"
+            className={` input input-bordered ${
+              darkMode ? "bg-[#272c31] text-gray-300" : ""
+            }`}
             readOnly
           />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text font-semibold">Apartment No</span>
+            <span
+              className={`label-text font-semibold ${
+                darkMode ? "text-gray-300" : ""
+              }`}
+            >
+              Apartment No
+            </span>
           </label>
           <input
             type="text"
             defaultValue={data.apartmentNo || "None"}
-            className="input input-bordered"
+            className={` input input-bordered ${
+              darkMode ? "bg-[#272c31] text-gray-300" : ""
+            }`}
             readOnly
           />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text font-semibold">Rent</span>
+            <span
+              className={`label-text font-semibold ${
+                darkMode ? "text-gray-300" : ""
+              }`}
+            >
+              Rent
+            </span>
           </label>
           <input
             type="text"
             defaultValue={data.rent || "None"}
-            className="input input-bordered"
+            className={` input input-bordered ${
+              darkMode ? "bg-[#272c31] text-gray-300" : ""
+            }`}
             readOnly
           />
         </div>
         <div className="form-control">
           <label className="label">
-            <span className="label-text font-semibold">Select Month</span>
+            <span
+              className={`label-text font-semibold ${
+                darkMode ? "text-gray-300" : ""
+              }`}
+            >
+              Select Month
+            </span>
           </label>
-          <select name="month" className="select select-bordered" required>
+          <select
+            name="month"
+            className={`select select-bordered ${
+              darkMode ? "bg-[#272c31] text-gray-300" : ""
+            }`}
+            required
+          >
             <option value="">--Select Month--</option>
             <option value="January">January</option>
             <option value="February">February</option>
@@ -153,8 +211,13 @@ const MakePayment = () => {
         </div>
 
         <div className="form-control mt-6">
-          <button type="submit" className="btn bg-secondary text-white hover:bg-orange-700" disabled={hasPaid}>
+          <button
+            type="submit"
+            className={`btn bg-secondary  text-white hover:bg-orange-700`}
+            disabled={hasPaid}
+          >
             {hasPaid ? "Payment Completed" : "Pay Now"}
+           
           </button>
         </div>
       </form>
