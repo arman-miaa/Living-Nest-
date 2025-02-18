@@ -7,9 +7,9 @@ import { useTheme } from "../Hooks/ThemeProvider ";
 const MainLayout = () => {
   const { darkMode } = useTheme();
     return (
-      <div>
+      <div className={`${darkMode ? 'bg-dark': ''}`}>
         <div
-          className={`  sticky z-50 top-0 ${darkMode ? "bg-black" : "bg-[#1f5b73] "}`}
+          className={`  sticky z-50 top-0 ${darkMode ? "bg-dark" : "bg-[#1f5b73] "}`}
         >
           <Navbar></Navbar>
         </div>

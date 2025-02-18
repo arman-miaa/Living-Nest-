@@ -2,8 +2,10 @@ import { Link } from "react-router-dom";
 import img from "../../src/assets/building.jpg";
 import Button from "../Shared/Button";
 import SectionTitle from "../Shared/SectionTitle";
+import { useTheme } from "../Hooks/ThemeProvider ";
 
 const DiscoverOurBuilding = () => {
+  const { darkMode } = useTheme();
   return (
     <section id="main" className=" py-12 px-6 lg:px-16">
       <SectionTitle
@@ -26,7 +28,11 @@ const DiscoverOurBuilding = () => {
           <h3 className="text-2xl font-semibold text-accent mb-4">
             Discover Our Story
           </h3>
-          <p className="text-gray-600 leading-relaxed">
+          <p
+            className={`${
+              darkMode ? "text-white" : "text-gray-600"
+            } leading-relaxed`}
+          >
             Our building combines state-of-the-art engineering with sustainable
             design, creating a space that is both functional and inspiring. With
             innovative use of materials, natural light optimization, and
@@ -36,12 +42,16 @@ const DiscoverOurBuilding = () => {
             innovation.
           </p>
 
-          <p className="text-gray-600 mt-4 mb-4">
+          <p
+            className={`mt-4 mb-4 ${darkMode ? "text-white" : "text-gray-600"}`}
+          >
             Discover the seamless blend of modern design and timeless elegance
             that defines our building. A true masterpiece crafted to inspire and
             amaze.
           </p>
-          <p className="text-gray-600 mt-4 mb-4">
+          <p
+            className={`mt-4 mb-4 ${darkMode ? "text-white" : "text-gray-600"}`}
+          >
             Immerse yourself in the innovation and artistry that shape our
             building. Every corner tells a story of creativity, vision, and
             craftsmanship.

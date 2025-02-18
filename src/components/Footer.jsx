@@ -2,14 +2,20 @@ import { Link } from "react-router-dom";
 import Button from "../Shared/Button";
 import { FaFacebook, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { useTheme } from "../Hooks/ThemeProvider ";
 
 const Footer = () => {
+  const { darkMode } = useTheme();
   const handleSubscribe = () => {
     toast.success('Thank You for subscribe US!')
   }
     return (
       <div className="mt-12 lg:mt-20">
-        <div className="footer bg-primary text-white  p-10">
+        <div
+          className={`footer ${
+            darkMode ? "bg-[#272c31]" : "bg-primary"
+          } text-white  p-10`}
+        >
           <footer className="flex justify-between flex-col lg:flex-row container mx-auto ">
             <nav className=" flex flex-col items-center mx-auto lg:mx-0">
               <img
@@ -27,7 +33,13 @@ const Footer = () => {
               </p>
             </nav>
             <nav className="text-lg mx-auto lg:mx-0 flex flex-col mt-4 lg:mt-0">
-              <h6 className="footer-title text-black">Quick Links</h6>
+              <h6
+                className={`footer-title ${
+                  darkMode ? "text-white" : "text-black"
+                }`}
+              >
+                Quick Links
+              </h6>
               <ul>
                 <li className="link link-hover hover:text-[#28ea72f0]">
                   <Link to="/">Home</Link>
@@ -48,7 +60,13 @@ const Footer = () => {
             </nav>
 
             <form className="mx-auto  lg:mx-0 text-center lg:text-left mt-4 lg:mt-0">
-              <h6 className="footer-title text-black text-lg">Newsletter</h6>
+              <h6
+                className={`footer-title ${
+                  darkMode ? "text-white" : "text-black"
+                } text-lg`}
+              >
+                Newsletter
+              </h6>
               <fieldset className="form-control w-80">
                 <label className="label">
                   <span className="label-text text-white">
@@ -101,7 +119,11 @@ const Footer = () => {
             </form>
           </footer>
         </div>
-        <footer className="footer footer-center bg-[#1f5b73] text-white p-4">
+        <footer
+          className={`footer footer-center ${
+            darkMode ? "bg-[#30363c]" : "bg-primary"
+          }  text-white p-4`}
+        >
           <aside>
             <p>
               Copyright © {new Date().getFullYear()} - All right reserved by BMS
