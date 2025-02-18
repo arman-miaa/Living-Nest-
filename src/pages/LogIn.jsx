@@ -68,7 +68,7 @@ const Login = () => {
         </Helmet>
         <div
           className={` shadow-xl mx-4 md:mx-0  p-4 rounded-xl ${
-            darkMode ? "bg-gray-800 border-emerald-800 border-2" : "bg-base-200"
+            darkMode ? " border-emerald-800 border-2" : "bg-base-200"
           }`}
         >
           {/* Header Section */}
