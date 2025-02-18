@@ -5,9 +5,10 @@ import { Helmet } from "react-helmet";
 import lottieLogin from "../../src/assets/lottie/login.json";
 import Lottie from "lottie-react";
 import useAuth from "../Hooks/useAuth";
-import { useTheme } from "../hooks/ThemeProvider ";
+
 import { saveUser } from "../api/userApi";
 import Button from "../Shared/Button";
+import { useTheme } from "../Hooks/ThemeProvider ";
 
 const Login = () => {
   const { signInUser, signInWithGoogle, setUser } = useAuth();

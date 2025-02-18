@@ -11,6 +11,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import Loading from "../../Loading";
 import SectionTitle from "../../../Shared/SectionTitle";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const COLORS = ["#0088FE", "#00C49F", "#ea580c", "#FF8042", "#A078FF"];
 const RADIAN = Math.PI / 180;
@@ -45,6 +46,7 @@ const renderCustomizedLabel = ({
 const AdminProfile = () => {
   const { user, loader } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const { darkMode } = useTheme();
 
   const { data = {}, isLoading } = useQuery({
     queryKey: ["adminInfo"],
@@ -69,7 +71,7 @@ const unavailableValue = Math.round((data.unavailable / 100) * data.total);
   
 
   return (
-    <div className="min-h-screen p-4 bg-gray-50">
+    <div className={`min-h-screen p-4 ${darkMode ? "bg-dark" : "bg-gray-50"}`}>
       <SectionTitle
         heading="Admin Profile"
         subHeading="Manage your account, view system statistics, and oversee platform operations from your personalized admin dashboard."
@@ -112,19 +114,27 @@ const unavailableValue = Math.round((data.unavailable / 100) * data.total);
       {/* Main Content */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Profile Section */}
-        <div className="bg-white text-center p-6 rounded shadow">
+        <div
+          className={`${
+            darkMode ? "bg-[#30363c]" : "bg-white"
+          } text-center p-6 rounded shadow`}
+        >
           <div className="h-32 bg-gradient-to-r from-primary to-accent rounded-t-lg"></div>
           <img
             src={user.photoURL}
             alt="Admin"
             className="w-28 h-28 rounded-full border-4 border-white object-cover -mt-14 mx-auto"
           />
-          <h2 className="text-2xl font-bold mt-4">{user.displayName}</h2>
+          <h2 className={`text-2xl font-bold mt-4 ${darkMode ? 'text-primary': ''}`}>{user.displayName}</h2>
           <p className="text-lg text-gray-500">{user.email}</p>
         </div>
 
         {/* Chart Section */}
-        <div className="bg-white p-6 rounded shadow">
+        <div
+          className={`${
+            darkMode ? "bg-[#30363c]" : "bg-white"
+          } p-6 rounded shadow`}
+        >
           <h3 className="text-xl font-bold mb-4 text-primary">
             Overview Chart
           </h3>
