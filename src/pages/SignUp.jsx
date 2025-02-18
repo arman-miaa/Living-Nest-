@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Helmet } from "react-helmet";
-import { useTheme } from "../hooks/ThemeProvider ";
+
 import Lottie from "lottie-react";
 import useAuth from "../Hooks/useAuth";
 import lottieSignUp from "../../src/assets/lottie/register.json";
 import { saveUser } from "../api/userApi";
 import Button from "../Shared/Button";
+import { useTheme } from "../Hooks/ThemeProvider ";
 
 const SignUp = () => {
   const { createUser, setUser, updateUserProfile } = useAuth();

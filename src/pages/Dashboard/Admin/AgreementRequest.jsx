@@ -7,9 +7,11 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { MdApartment } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
+import { useTheme } from "../../../Hooks/ThemeProvider ";
 
 const AgreementRequest = () => {
   const axiosSecure = useAxiosSecure();
+  const { darkMode } = useTheme();
 
   const {
     data = [],
@@ -52,7 +54,11 @@ const AgreementRequest = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-6 bg-gray-50 mb-8">
+    <div
+      className={`min-h-screen p-4 md:p-6  mb-8 ${
+        darkMode ? "bg-dark" : "bg-gray-50"
+      }`}
+    >
       <SectionTitle
         heading="Agreement Requests"
         subHeading="Manage pending agreement requests here"
