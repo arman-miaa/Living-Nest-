@@ -12,6 +12,7 @@ import notFoundImg from "../../src/assets/not-found.png";
 
 import { FaBuilding,  FaLayerGroup, FaDoorOpen, FaCoins } from "react-icons/fa";
 import Button from "../Shared/Button";
+import { useTheme } from "../Hooks/ThemeProvider ";
 
 const Apartments = () => {
   const axiosPublic = useAxiosPublic();
@@ -25,6 +26,7 @@ const Apartments = () => {
   const [maxRent, setMaxRent] = useState(0);
   const navigate = useNavigate();
   const [loadingPagination, setLoadingPagination] = useState(false); 
+  const { darkMode } = useTheme();
 
   const numberOfPages = Math.ceil(count / itemsPerPage);
   const pages = [...Array(numberOfPages).keys()];
@@ -225,7 +227,7 @@ const Apartments = () => {
             <button
               key={page}
               onClick={() => setCurrentPage(page)}
-              className={`btn mr-2 border-orange-600 hover:bg-secondary ${
+              className={`btn mr-2 border-orange-600 ${darkMode ? 'text-white': ''} hover:bg-secondary ${
                 currentPage === page ? "btn-primary bg-accent" : "btn-outline"
               }`}
             >
