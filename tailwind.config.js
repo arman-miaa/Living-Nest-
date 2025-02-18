@@ -10,6 +10,7 @@ export default {
         background: "#FAFAFA",
         text: "#2D2D2D",
         muted: "#D1D5DB",
+        dark: "#121212",
       },
     },
   },

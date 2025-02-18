@@ -6,10 +6,13 @@ import { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { GrLogout } from "react-icons/gr";
 import { toast } from "react-toastify";
+import { useTheme } from "../Hooks/ThemeProvider ";
+import { MoonIcon, SunIcon } from "@heroicons/react/16/solid";
 
 const Navbar = () => {
   const { user, logOutUser } = useAuth() || {}; 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
+  const { darkMode, toggleTheme } = useTheme();
 
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
@@ -65,6 +68,18 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
+        {/* Theme Toggle Button */}
+        <button
+          onClick={toggleTheme}
+          className=" px-2 capitalize flex justify-center items-center gap-0 md:gap-2"
+          aria-label="Toggle Theme"
+        >
+          {darkMode ? (
+            <SunIcon className="h-6 w-6   md:h-8 md:w-8 text-yellow-500" />
+          ) : (
+            <MoonIcon className="h-6 w-6   md:h-8 md:w-8" />
+          )}
+        </button>
         {user ? (
           <div className="navbar-end">
             <div className="dropdown dropdown-end">
@@ -153,7 +168,7 @@ const Navbar = () => {
               }}
               className="btn bg-[#1f5b73] text-lg hover:bg-secondary text-white w-full"
             >
-             <GrLogout /> Log Out 
+              <GrLogout /> Log Out
             </button>
           </div>
         )}
